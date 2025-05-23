@@ -38,7 +38,7 @@ const features = [
     icon: Bell,
     title: "Smart Notifications",
     description:
-      "Get timely reminders and alerts that adapt to your schedule and study patterns."
+      "Receive personalized reminders and alerts that adapt to your study schedule and preferences."
   },
   {
     icon: MessageSquare,
@@ -79,10 +79,9 @@ const FeaturesSection = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={cardVariants}
-            className="flex"
           >
             <Card
-              className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-start text-left transition-all duration-300 border-0 hover:shadow-xl hover:-translate-y-1 flex-1 min-h-[340px]"
+              className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-start text-left transition-all duration-300 border-0 hover:shadow-xl hover:-translate-y-1"
             >
               <div className="mb-6 flex items-center justify-center w-12 h-12 rounded-full border border-blue-100 bg-blue-50">
                 <feature.icon className="w-7 h-7 text-blue-500" strokeWidth={2.2} />

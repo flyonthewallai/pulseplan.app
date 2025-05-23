@@ -5,6 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Calendar, Settings, Clock, Info } from "lucide-react";
 import { useState } from "react";
+import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import FeaturesSection from "@/components/FeaturesSection";
@@ -17,13 +18,14 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+      <Navbar />
       <HeroSection />
-      <HowItWorksSection />
-      <FeaturesSection />
-      <PricingSection />
-      <TestimonialsSection />
-      <FAQSection />
-      <AboutSection />
+      <div id="how-it-works"><HowItWorksSection /></div>
+      <div id="features"><FeaturesSection /></div>
+      <div id="pricing"><PricingSection /></div>
+      <div id="testimonials"><TestimonialsSection /></div>
+      <div id="faq"><FAQSection /></div>
+      <div id="about"><AboutSection /></div>
       <Footer />
     </div>
   );

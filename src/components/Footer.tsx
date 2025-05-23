@@ -47,20 +47,20 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4 text-white">Product</h4>
             <ul className="space-y-2 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">API</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
+              <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
+              <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
+              <li><a href="#testimonials" className="hover:text-white transition-colors">Testimonials</a></li>
+              <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold mb-4 text-white">Company</h4>
             <ul className="space-y-2 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
+              <li><a href="https://flyonthewalldev.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Blog</a></li>
+              <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
             </ul>
           </div>
         </div>

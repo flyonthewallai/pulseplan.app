@@ -8,10 +8,7 @@ import {
 
 const AboutSection = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-indigo-50/30 to-white pointer-events-none" />
-      
+    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
       <div className="relative">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -62,14 +59,20 @@ const AboutSection = () => {
           </div>
           
           <div className="flex justify-center">
-            <Button 
-              className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300"
-              onClick={() => window.open('https://flyonthewalldev.com', '_blank')}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <Sparkles className="w-4 h-4 mr-2" />
-              Visit our studio
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
+              <Button 
+                className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 px-8 py-4 rounded-xl text-lg"
+                onClick={() => window.open('https://flyonthewalldev.com', '_blank')}
+              >
+                <Sparkles className="w-5 h-5" />
+                Visit our studio
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </motion.div>
           </div>
         </motion.div>
 
