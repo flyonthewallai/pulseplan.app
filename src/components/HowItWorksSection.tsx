@@ -24,29 +24,6 @@ const steps = [
   }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      delay: 0.1 + i * 0.1,
-      ease: "easeOut"
-    }
-  })
-};
-
 const HowItWorksSection = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -56,17 +33,39 @@ const HowItWorksSection = () => {
           PulsePlan makes academic planning effortless with smart AI technology
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <motion.div 
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.15
+            }
+          }
+        }}
+      >
         {steps.map((step, index) => (
           <motion.div
             key={index}
-            custom={index}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={cardVariants}
-            whileHover={{ boxShadow: "0 8px 32px 0 rgba(0, 32, 128, 0.10)", y: -4 }}
-            className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-start text-left transition-all duration-300 border-0 cursor-pointer min-h-[300px]"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { 
+                opacity: 1, 
+                y: 0,
+                transition: {
+                  duration: 0.5,
+                  ease: "easeOut"
+                }
+              }
+            }}
+            whileHover={{ 
+              y: -4,
+              transition: { duration: 0.2 }
+            }}
+            className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-start text-left transition-shadow duration-300 border-0 cursor-pointer min-h-[300px] hover:shadow-xl"
           >
             <div className="mb-6 flex items-center justify-center w-12 h-12 rounded-full border border-blue-100 bg-blue-50">
               <step.icon className="w-7 h-7 text-blue-500" strokeWidth={2.2} />
@@ -79,7 +78,7 @@ const HowItWorksSection = () => {
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

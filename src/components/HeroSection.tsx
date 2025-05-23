@@ -180,34 +180,35 @@ const HeroSection = () => {
       </div>
 
       {/* Bouncing Arrow */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ 
-          opacity: 1,
-          y: [0, -10, 0]
-        }}
-        transition={{ 
-          opacity: { duration: 0.6, delay: 1.6, ease: "easeOut" },
-          y: {
-            duration: 1.5,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-            delay: 2.2 // Start bouncing after fade-in
-          }
-        }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.a 
-          href="#features" 
-          className="flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors"
-          whileHover={{ y: -2 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      <div className="w-full flex justify-center pb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ 
+            opacity: 1,
+            y: [0, -10, 0]
+          }}
+          transition={{ 
+            opacity: { duration: 0.6, delay: 1.6, ease: "easeOut" },
+            y: {
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+              delay: 2.2 // Start bouncing after fade-in
+            }
+          }}
         >
-          <span className="text-sm font-medium">See more</span>
-          <ChevronDown className="w-6 h-6" />
-        </motion.a>
-      </motion.div>
+          <motion.a 
+            href="#features" 
+            className="flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors"
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <span className="text-sm font-medium">See more</span>
+            <ChevronDown className="w-6 h-6" />
+          </motion.a>
+        </motion.div>
+      </div>
     </section>
   );
 };
