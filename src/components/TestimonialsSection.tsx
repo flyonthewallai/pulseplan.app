@@ -7,6 +7,7 @@ import {
   Sparkles,
   MessageSquare
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -18,10 +19,10 @@ const testimonials = [
     gradient: "from-blue-500 to-indigo-600"
   },
   {
-    name: "Taylor Karst",
-    role: "Nursing Student",
-    university: "Grand Canyon University",
-    content: "As a nursing student with a packed schedule, PulsePlan's Canvas integration saves me hours every week. It's like having a personal assistant for my academic life.",
+    name: "Tyler Riley",
+    role: "Pre-Law Student",
+    university: "Louisiana State University",
+    content: "As a pre-law student with a packed schedule, PulsePlan's Canvas integration saves me hours every week. It's like having a personal assistant for my academic life.",
     rating: 5,
     gradient: "from-blue-600 to-indigo-700"
   },
@@ -49,47 +50,50 @@ const TestimonialsSection = () => {
       
       <div className="grid md:grid-cols-3 gap-8">
         {testimonials.map((testimonial, index) => (
-          <Card 
+          <motion.div
             key={index}
-            className="relative border-0 shadow-lg bg-white/80 backdrop-blur-sm animate-fade-in overflow-hidden group hover:shadow-xl transition-all duration-300"
-            style={{ animationDelay: `${index * 200}ms` }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: index * 0.15, ease: "easeOut" }}
           >
-            <CardContent className="p-6 relative">
-              {/* Quote icon */}
-              <div className={`absolute top-6 right-6 w-8 h-8 bg-gradient-to-br ${testimonial.gradient} rounded-lg opacity-10 group-hover:opacity-20 transition-opacity flex items-center justify-center`}>
-                <Quote className="w-4 h-4 text-white" />
-              </div>
-              
-              <div className="flex items-center mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star 
-                    key={i} 
-                    className="w-5 h-5 text-blue-400 fill-current" 
-                  />
-                ))}
-              </div>
-              
-              <blockquote className="text-gray-700 mb-6 leading-relaxed relative">
-                "{testimonial.content}"
-              </blockquote>
-              
-              <div className="flex items-center gap-3">
-                <div>
-                  <div className="font-semibold text-gray-900 flex items-center gap-2">
-                    {testimonial.name}
-                    <GraduationCap className="w-4 h-4 text-blue-500" />
-                  </div>
-                  <div className="text-sm text-blue-600 flex items-center gap-2">
-                    {testimonial.role}
-                    <School className="w-3 h-3 text-blue-300" />
-                  </div>
-                  <div className="text-sm text-blue-600 font-medium">
-                    {testimonial.university}
+            <Card 
+              className="relative border-0 shadow-lg bg-white/80 backdrop-blur-sm overflow-hidden group hover:shadow-xl transition-all duration-300"
+            >
+              <CardContent className="p-6 relative">
+                {/* Quote icon */}
+                <div className={`absolute top-6 right-6 w-8 h-8 bg-gradient-to-br ${testimonial.gradient} rounded-lg opacity-10 group-hover:opacity-20 transition-opacity flex items-center justify-center`}>
+                  <Quote className="w-4 h-4 text-white" />
+                </div>
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className="w-5 h-5 text-blue-400 fill-current" 
+                    />
+                  ))}
+                </div>
+                <blockquote className="text-gray-700 mb-6 leading-relaxed relative">
+                  "{testimonial.content}"
+                </blockquote>
+                <div className="flex items-center gap-3">
+                  <div>
+                    <div className="font-semibold text-gray-900 flex items-center gap-2">
+                      {testimonial.name}
+                      <GraduationCap className="w-4 h-4 text-blue-500" />
+                    </div>
+                    <div className="text-sm text-blue-600 flex items-center gap-2">
+                      {testimonial.role}
+                      <School className="w-3 h-3 text-blue-300" />
+                    </div>
+                    <div className="text-sm text-blue-600 font-medium">
+                      {testimonial.university}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
     </section>

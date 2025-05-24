@@ -20,6 +20,7 @@ import {
   Shield,
   Bell
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
   <svg 
@@ -42,7 +43,7 @@ const PricingSection = () => {
       period: "forever",
       description: "Perfect for trying out PulsePlan",
       features: [
-        { text: "Plan up to 7 days in advance", icon: Calendar },
+        { text: "Make one free schedule per week", icon: Calendar },
         { text: "Basic AI scheduling", icon: Brain },
         { text: "Canvas sync", icon: Download },
         { text: "Calendar integration", icon: Clock },
@@ -73,7 +74,7 @@ const PricingSection = () => {
     },
     {
       name: "Lifetime",
-      price: "$99",
+      price: "$75",
       period: "one-time",
       description: "Early adopter special pricing",
       features: [
@@ -125,65 +126,72 @@ const PricingSection = () => {
       
       <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {plans.map((plan, index) => (
-          <Card 
+          <motion.div
             key={plan.name}
-            className={`relative border-0 transition-shadow duration-300 hover:shadow-xl flex flex-col ${
-              plan.popular 
-                ? 'shadow-xl' 
-                : 'shadow-lg'
-            }`}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1.2, delay: index * 0.25, ease: "easeOut" }}
           >
-            {plan.popular && (
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                <Badge className="bg-blue-600 text-white px-4 py-1 rounded-full flex items-center gap-1 shadow-lg">
-                  <Sparkles className="w-3 h-3" />
-                  Most Popular
-                </Badge>
-              </div>
-            )}
-            
-            <CardHeader className="text-center pb-4 relative">
-              <div className={`w-20 h-20 mx-auto mb-4 ${plan.bgColor} rounded-2xl shadow-lg flex items-center justify-center`}>
-                <plan.icon className="w-10 h-10 text-white" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-gray-900">
-                {plan.name}
-              </CardTitle>
-              <div className="mt-4">
-                <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                <span className="text-gray-500 ml-1">/{plan.period}</span>
-              </div>
-              <CardDescription className="text-gray-600 mt-2">
-                {plan.description}
-              </CardDescription>
-            </CardHeader>
-            
-            <CardContent className="flex flex-col flex-grow">
-              <ul className="space-y-4 flex-grow">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start gap-3">
-                    <feature.icon className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700 text-sm leading-relaxed">{feature.text}</span>
-                  </li>
-                ))}
-              </ul>
+            <Card 
+              className={`relative border-0 transition-shadow duration-300 hover:shadow-xl flex flex-col ${
+                plan.popular 
+                  ? 'shadow-xl' 
+                  : 'shadow-lg'
+              }`}
+            >
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                  <Badge className="bg-blue-600 text-white px-4 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                    <Sparkles className="w-3 h-3" />
+                    Most Popular
+                  </Badge>
+                </div>
+              )}
               
-              <div className="mt-8">
-                <Button 
-                  className={`w-full py-3 rounded-xl transition-all duration-300 transform flex items-center justify-center gap-2 ${
-                    plan.name === "Free"
-                      ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]'
-                      : plan.name === "Premium"
-                      ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]'
-                      : 'bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]'
-                  }`}
-                >
-                  {plan.name === "Free" && <AppleLogo className="w-5 h-5" />}
-                  {plan.cta}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+              <CardHeader className="text-center pb-4 relative">
+                <div className={`w-20 h-20 mx-auto mb-4 ${plan.bgColor} rounded-2xl shadow-lg flex items-center justify-center`}>
+                  <plan.icon className="w-10 h-10 text-white" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-gray-900">
+                  {plan.name}
+                </CardTitle>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                  <span className="text-gray-500 ml-1">/{plan.period}</span>
+                </div>
+                <CardDescription className="text-gray-600 mt-2">
+                  {plan.description}
+                </CardDescription>
+              </CardHeader>
+              
+              <CardContent className="flex flex-col flex-grow">
+                <ul className="space-y-4 flex-grow">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start gap-3">
+                      <feature.icon className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm leading-relaxed">{feature.text}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <div className="mt-8">
+                  <Button 
+                    className={`w-full py-3 rounded-xl transition-all duration-300 transform flex items-center justify-center gap-2 ${
+                      plan.name === "Free"
+                        ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]'
+                        : plan.name === "Premium"
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]'
+                        : 'bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]'
+                    }`}
+                  >
+                    {plan.name === "Free" && <AppleLogo className="w-5 h-5" />}
+                    {plan.cta}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
     </section>

@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -175,19 +174,74 @@
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
+    -webkit-appearance: none;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: transparent;
     border-radius: 4px;
+    -webkit-appearance: none;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: gray;
     border-radius: 4px;
+    -webkit-appearance: none;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  /* Safari specific */
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Hide scrollbar when not in use */
+  * {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  /* Show scrollbar only when scrolling */
+  *:hover::-webkit-scrollbar {
+    display: block;
+  }
+
+  /* Remove all possible outlines */
+  *:focus,
+  *:focus-visible,
+  *:focus-within,
+  *::-webkit-scrollbar:focus,
+  *::-webkit-scrollbar-track:focus,
+  *::-webkit-scrollbar-thumb:focus {
+    outline: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Additional outline removal for specific elements */
+  div:focus,
+  div:focus-visible,
+  div:focus-within,
+  button:focus,
+  button:focus-visible,
+  button:focus-within {
+    outline: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 }
