@@ -116,7 +116,7 @@ const PricingSection = () => {
               Yearly
             </span>
           </div>
-          {isYearly && (
+          {isYearly && false && (
             <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
               Save 17%
             </Badge>
@@ -156,9 +156,31 @@ const PricingSection = () => {
                 <CardTitle className="text-2xl font-bold text-gray-900">
                   {plan.name}
                 </CardTitle>
-                <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                  <span className="text-gray-500 ml-1">/{plan.period}</span>
+                <div className="mt-4 flex flex-col items-center justify-center">
+                  {plan.name === "Lifetime" ? (
+                    <>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-2xl text-gray-400 line-through">$79</span>
+                        <span className="text-4xl font-bold text-purple-600">$49</span>
+                        <span className="text-gray-500 ml-1">/one-time</span>
+                      </div>
+                      <span className="inline-block mt-2 bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full">Limited Time Offer</span>
+                    </>
+                  ) : plan.name === "Premium" && isYearly ? (
+                    <>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-2xl text-gray-400 line-through">$36</span>
+                        <span className="text-4xl font-bold text-blue-600">$30</span>
+                        <span className="text-gray-500 ml-1">/year</span>
+                      </div>
+                      <span className="inline-block mt-2 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Save 17%</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                      <span className="text-gray-500 ml-1">/{plan.period}</span>
+                    </>
+                  )}
                 </div>
                 <CardDescription className="text-gray-600 mt-2">
                   {plan.description}
@@ -186,6 +208,8 @@ const PricingSection = () => {
                     }`}
                   >
                     {plan.name === "Free" && <AppleLogo className="w-5 h-5" />}
+                    {plan.name === "Premium" && <Crown className="w-5 h-5" />}
+                    {plan.name === "Lifetime" && <Star className="w-5 h-5" />}
                     {plan.cta}
                   </Button>
                 </div>

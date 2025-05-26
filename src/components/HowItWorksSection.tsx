@@ -65,7 +65,7 @@ const HowItWorksSection = () => {
               y: -4,
               transition: { duration: 0.2 }
             }}
-            className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-start text-left transition-shadow duration-300 border-0 cursor-pointer min-h-[300px] hover:shadow-xl"
+            className="bg-white rounded-2xl shadow-md p-6 flex flex-col items-start text-left transition-shadow duration-300 border-0 cursor-pointer min-h-[220px] flex-1 hover:shadow-xl"
           >
             <div className="mb-6 flex items-center justify-center w-12 h-12 rounded-full border border-blue-100 bg-blue-50">
               <step.icon className="w-7 h-7 text-blue-500" strokeWidth={2.2} />

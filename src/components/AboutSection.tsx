@@ -33,7 +33,7 @@ const AboutSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Fly on the Wall is a student-founded development studio crafting AI-powered tools that make a real difference in students' lives.
+            Fly on the Wall is a student-founded development studio crafting AI-powered tools that make a real impact on productivity.
           </motion.p>
         </motion.div>
 
@@ -50,10 +50,10 @@ const AboutSection = () => {
             </h3>
             <div className="space-y-6 text-gray-600 leading-relaxed">
               <p>
-                Born from the shared experiences of three roommates, Fly on the Wall combines technical expertise with a deep understanding of student needs. We're building tools that solve real problems—starting with PulsePlan, our AI-powered academic planning assistant.
+                Born from the shared experiences of three roommates, Fly on the Wall combines technical expertise with a deep understanding in the integration of AI and Machine Learning into daily needs. We're building tools that solve real problems—starting with PulsePlan, our AI-powered academic planning assistant.
               </p>
               <p>
-                Our approach is simple: create intuitive, powerful tools that automate the mundane and amplify what matters. Every feature we build is crafted with care, tested by real students, and refined through continuous feedback.
+                Our approach is simple: create intuitive, powerful tools that automate the mundane and amplify what matters. Every feature we build is crafted with care, tested by real users, and refined through continuous feedback.
               </p>
             </div>
           </div>
@@ -87,7 +87,7 @@ const AboutSection = () => {
             Join Our Journey
           </h3>
           <p className="text-gray-600 max-w-2xl mx-auto mb-6">
-            We're always looking for passionate students to collaborate with. Whether you're interested in development, design, or just want to share your ideas, we'd love to hear from you.
+            We're always looking for passionate creators to collaborate with. Whether you're interested in development, design, or just want to share your ideas, we'd love to hear from you.
           </p>
           <Button 
             variant="outline"
