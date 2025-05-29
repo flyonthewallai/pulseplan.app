@@ -1,15 +1,8 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { 
-  Brain, 
-  Shield, 
-  Calendar, 
-  Download, 
-  Lock, 
-  RefreshCw,
-  HelpCircle,
-  ChevronDown
-} from "lucide-react";
+import { Brain, Shield, Calendar, Download, Lock, RefreshCw, HelpCircle, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
+import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 
 const faqs = [
   {
@@ -49,53 +42,60 @@ const itemVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      delay: 0.1 + i * 0.08,
-      ease: "easeOut"
-    }
+    transition: { duration: 0.6, delay: 0.1 + i * 0.08, ease: "easeOut" }
   })
 };
 
 const FAQSection = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-      <div className="text-center mb-16 animate-fade-in">
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-xl text-gray-600">
-          Everything you need to know about PulsePlan
-        </p>
-      </div>
-      <Accordion type="single" collapsible className="space-y-4 animate-fade-in">
-        {faqs.map((faq, index) => (
-          <motion.div
-            key={index}
-            custom={index}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={itemVariants}
-          >
-            <AccordionItem 
-              value={`item-${index}`}
-              className="border border-gray-200 rounded-xl px-6 bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 mb-4"
+    <Section className="relative">
+      <Container>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
+          <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
+            Everything you need to know about PulsePlan
+          </p>
+        </motion.div>
+
+        <Accordion type="single" collapsible className="space-y-4 max-w-3xl mx-auto">
+          {faqs.map((faq, index) => (
+            <motion.div
+              key={index}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={itemVariants}
             >
-              <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600 py-6 group">
-                <div className="flex items-center gap-3">
-                  <faq.icon className="w-5 h-5 text-blue-400 group-hover:text-blue-500 transition-colors" />
-                  {faq.question}
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-gray-700 leading-relaxed pb-6 pl-8">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          </motion.div>
-        ))}
-      </Accordion>
-    </section>
+              <AccordionItem
+                value={`item-${index}`}
+                className="glass-card rounded-xl px-6 hover:shadow-md transition-all duration-300 mb-4"
+              >
+                <AccordionTrigger className="text-left font-semibold hover:text-rhythm-blue py-6 group">
+                  <div className="flex items-center gap-3">
+                    <faq.icon className="w-5 h-5 text-rhythm-blue group-hover:text-rhythm-blue/80 transition-colors" />
+                    {faq.question}
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed pb-6 pl-8">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            </motion.div>
+          ))}
+        </Accordion>
+      </Container>
+
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-rhythm-blue/10 rounded-full filter blur-3xl"></div>
+      </div>
+    </Section>
   );
 };
 

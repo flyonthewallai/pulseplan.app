@@ -1,224 +1,140 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { useState } from "react";
-import { 
-  Check, 
-  Sparkles, 
-  Calendar, 
-  Zap, 
-  Crown,
-  Clock,
-  Brain,
-  Settings,
-  BarChart,
-  MessageSquare,
-  Download,
-  Star,
-  Gift,
-  Shield,
-  Bell
-} from "lucide-react";
+import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
+import { Check, Sparkles, Apple } from "lucide-react";
 import { motion } from "framer-motion";
 
-const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
-  <svg 
-    className={className} 
-    viewBox="0 0 24 24" 
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M17.05 20.28c-.98.95-2.05.88-3.08.41-1.09-.47-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.41C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.19 2.31-.89 3.51-.84 1.54.07 2.7.61 3.44 1.57-3.14 1.88-2.29 5.13.22 6.41-.65 1.29-1.52 2.58-2.25 4.03zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-  </svg>
-);
-
 const PricingSection = () => {
-  const [isYearly, setIsYearly] = useState(false);
-
   const plans = [
     {
       name: "Free",
       price: "$0",
-      period: "forever",
-      description: "Perfect for trying out PulsePlan",
+      period: "",
+      description: "Perfect for getting started",
       features: [
-        { text: "Make one free schedule per week", icon: Calendar },
-        { text: "Basic AI scheduling", icon: Brain },
-        { text: "Canvas sync", icon: Download },
-        { text: "Calendar integration", icon: Clock },
-        { text: "Basic progress tracking", icon: BarChart }
+        "One free schedule/week",
+        "Basic AI scheduling",
+        "Canvas & calendar sync"
       ],
       cta: "Get the App",
       popular: false,
-      bgColor: "bg-blue-500",
-      icon: Calendar
     },
     {
       name: "Premium",
-      price: isYearly ? "$30" : "$3",
-      period: isYearly ? "year" : "month",
-      description: "Unlock the full power of AI planning",
+      price: "$3",
+      period: "/month",
+      description: "For serious students",
       features: [
-        { text: "Full-month planning", icon: Calendar },
-        { text: "Recurring task automation", icon: Zap },
-        { text: "Advanced insights & analytics", icon: BarChart },
-        { text: "Priority AI chat support", icon: MessageSquare },
-        { text: "Custom scheduling preferences", icon: Settings },
-        { text: "Export & backup features", icon: Download }
+        "Full-month planning",
+        "Recurring task automation",
+        "Priority AI chat support"
       ],
       cta: "Upgrade to Premium",
       popular: true,
-      bgColor: "bg-blue-600",
-      icon: Crown
     },
     {
       name: "Lifetime",
-      price: "$75",
-      period: "one-time",
-      description: "Early adopter special pricing",
+      price: "$49",
+      period: "",
+      description: "One-time payment",
       features: [
-        { text: "Everything in Premium", icon: Crown },
-        { text: "Lifetime access", icon: Shield },
-        { text: "Priority feature requests", icon: Star },
-        { text: "Early access to new features", icon: Gift },
-        { text: "Premium support", icon: Bell },
-        { text: "No recurring payments", icon: Zap }
+        "All premium features",
+        "Lifetime access",
+        "Exclusive support"
       ],
       cta: "Get Lifetime Access",
       popular: false,
-      bgColor: "bg-purple-500",
-      icon: Star
     }
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">
-          Simple, transparent pricing
-        </h2>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-          Start free and upgrade when you're ready for more powerful features
-        </p>
-        
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex items-center justify-center gap-4">
-            <span className={`text-sm transition-colors duration-200 ${!isYearly ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
-              Monthly
-            </span>
-            <Switch
-              checked={isYearly}
-              onCheckedChange={setIsYearly}
-              className="data-[state=checked]:bg-blue-600"
-            />
-            <span className={`text-sm transition-colors duration-200 ${isYearly ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
-              Yearly
-            </span>
-          </div>
-          {isYearly && false && (
-            <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
-              Save 17%
-            </Badge>
-          )}
-        </div>
-      </div>
-      
-      <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        {plans.map((plan, index) => (
-          <motion.div
-            key={plan.name}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1.2, delay: index * 0.25, ease: "easeOut" }}
-          >
-            <Card 
-              className={`relative border-0 transition-shadow duration-300 hover:shadow-xl flex flex-col ${
-                plan.popular 
-                  ? 'shadow-xl' 
-                  : 'shadow-lg'
+    <Section className="relative">
+      <Container>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold">Simple pricing</h2>
+          <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
+            Start free and upgrade when you're ready for more powerful features.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {plans.map((plan, index) => (
+            <motion.div
+              key={plan.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className={`glass-card rounded-2xl p-8 relative ${
+                plan.popular ? 'border border-rhythm-blue/30' : ''
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                  <Badge className="bg-blue-600 text-white px-4 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <Badge className="bg-rhythm-blue text-white px-4 py-1 rounded-full flex items-center gap-1">
                     <Sparkles className="w-3 h-3" />
                     Most Popular
                   </Badge>
                 </div>
               )}
-              
-              <CardHeader className="text-center pb-4 relative">
-                <div className={`w-20 h-20 mx-auto mb-4 ${plan.bgColor} rounded-2xl shadow-lg flex items-center justify-center`}>
-                  <plan.icon className="w-10 h-10 text-white" />
-                </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">
-                  {plan.name}
-                </CardTitle>
-                <div className="mt-4 flex flex-col items-center justify-center">
-                  {plan.name === "Lifetime" ? (
-                    <>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-2xl text-gray-400 line-through">$79</span>
-                        <span className="text-4xl font-bold text-purple-600">$49</span>
-                        <span className="text-gray-500 ml-1">/one-time</span>
-                      </div>
-                      <span className="inline-block mt-2 bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full">Limited Time Offer</span>
-                    </>
-                  ) : plan.name === "Premium" && isYearly ? (
-                    <>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-2xl text-gray-400 line-through">$36</span>
-                        <span className="text-4xl font-bold text-blue-600">$30</span>
-                        <span className="text-gray-500 ml-1">/year</span>
-                      </div>
-                      <span className="inline-block mt-2 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Save 17%</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                      <span className="text-gray-500 ml-1">/{plan.period}</span>
-                    </>
+
+              <div className="text-center mb-8">
+                <h3 className="text-xl font-semibold mb-2">{plan.name}</h3>
+                <div className="mb-2">
+                  <span className="text-4xl font-bold">{plan.price}</span>
+                  {plan.period && (
+                    <span className="text-muted-foreground ml-1">{plan.period}</span>
                   )}
                 </div>
-                <CardDescription className="text-gray-600 mt-2">
-                  {plan.description}
-                </CardDescription>
-              </CardHeader>
-              
-              <CardContent className="flex flex-col flex-grow">
-                <ul className="space-y-4 flex-grow">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-3">
-                      <feature.icon className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm leading-relaxed">{feature.text}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <div className="mt-8">
-                  <Button 
-                    className={`w-full py-3 rounded-xl transition-all duration-300 transform flex items-center justify-center gap-2 ${
-                      plan.name === "Free"
-                        ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]'
-                        : plan.name === "Premium"
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]'
-                        : 'bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] hover:brightness-105 active:scale-[0.98]'
-                    }`}
-                  >
-                    {plan.name === "Free" && <AppleLogo className="w-5 h-5" />}
-                    {plan.name === "Premium" && <Crown className="w-5 h-5" />}
-                    {plan.name === "Lifetime" && <Star className="w-5 h-5" />}
-                    {plan.cta}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
+                <p className="text-muted-foreground text-sm">{plan.description}</p>
+              </div>
+
+              <ul className="space-y-3 mb-8">
+                {plan.features.map((feature, featureIndex) => (
+                  <li key={featureIndex} className="flex items-center gap-3">
+                    <div className="w-5 h-5 bg-rhythm-blue/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-rhythm-blue" />
+                    </div>
+                    <span className="text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <motion.div
+                whileHover={{ scale: 1.025 }}
+                whileTap={{ scale: 0.99 }}
+                className="w-full"
+              >
+                <Button
+                  className={`w-full ${
+                    plan.popular
+                      ? 'bg-rhythm-blue hover:bg-rhythm-blue/90 text-white'
+                      : 'bg-secondary hover:bg-secondary/90 text-secondary-foreground'
+                  }`}
+                >
+                  {plan.cta === 'Get Started Free' ? (
+                    <><Apple className="w-5 h-5 mr-2" />Download the App</>
+                  ) : (
+                    plan.cta
+                  )}
+                </Button>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+      </Container>
+
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-rhythm-blue/10 rounded-full filter blur-3xl"></div>
       </div>
-    </section>
+    </Section>
   );
 };
 
