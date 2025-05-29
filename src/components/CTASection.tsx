@@ -21,24 +21,49 @@ export const CTASection = () => {
   return (
     <Section className="relative">
       <Container>
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="relative inline-block mb-6">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto text-center"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="relative inline-block mb-6"
+          >
             <GlowingOrb size="md" className="mx-auto" color="blue" />
-          </div>
-          
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+          >
             Plan less. <span className="text-gradient-blue">Do more.</span>
-          </h2>
-          
-          <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto"
+          >
             Join students who are finding their academic rhythm
             with AI-powered scheduling that adapts to their real habits.
-          </p>
-          
+          </motion.p>
           <ButtonGroup className="justify-center mt-8">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
             >
               <Button size="lg" className="bg-rhythm-blue text-white hover:bg-rhythm-blue/90">
                 <AppleLogo />Download the App
@@ -47,13 +72,17 @@ export const CTASection = () => {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: true }}
             >
               <Button size="lg" variant="outline">
                 Upgrade to Premium
               </Button>
             </motion.div>
           </ButtonGroup>
-        </div>
+        </motion.div>
       </Container>
 
       <div className="absolute inset-0 pointer-events-none">
