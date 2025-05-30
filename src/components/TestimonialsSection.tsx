@@ -55,12 +55,16 @@ const TestimonialsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="relative group rounded-2xl transition-all duration-300"
             >
-              <TestimonialCard
-                quote={testimonial.quote}
-                author={testimonial.author}
-                role={testimonial.role}
-              />
+              <div className="relative z-10">
+                <TestimonialCard
+                  quote={testimonial.quote}
+                  author={testimonial.author}
+                  university={testimonial.university}
+                  withAnimatedLines
+                />
+              </div>
             </motion.div>
           ))}
         </div>

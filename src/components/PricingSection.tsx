@@ -72,13 +72,13 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`glass-card rounded-2xl p-8 relative ${
-                plan.popular ? 'border border-rhythm-blue/30' : ''
+              className={`glass-card rounded-2xl p-8 relative group border border-white/5 hover:border-blue-100 transition-all duration-300 ${
+                plan.popular ? 'border-2 border-rhythm-blue/30' : ''
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <Badge className="bg-rhythm-blue text-white px-4 py-1 rounded-full flex items-center gap-1">
+                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
+                  <Badge className="bg-rhythm-blue text-white px-4 py-1 rounded-full flex items-center gap-1 shadow-lg">
                     <Sparkles className="w-3 h-3" />
                     Most Popular
                   </Badge>

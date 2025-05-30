@@ -24,14 +24,14 @@ export const CTASection = () => {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
           viewport={{ once: true }}
           className="max-w-3xl mx-auto text-center"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             viewport={{ once: true }}
             className="relative inline-block mb-6"
           >
@@ -40,7 +40,7 @@ export const CTASection = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
             viewport={{ once: true }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
           >
@@ -49,35 +49,29 @@ export const CTASection = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
             viewport={{ once: true }}
             className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto"
           >
             Join students who are finding their academic rhythm
             with AI-powered scheduling that adapts to their real habits.
           </motion.p>
-          <ButtonGroup className="justify-center mt-8">
+          <ButtonGroup className="justify-center mt-8 gap-4">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
-              <Button size="lg" className="bg-rhythm-blue text-white hover:bg-rhythm-blue/90">
-                <AppleLogo />Download the App
+              <Button size="lg" className="bg-rhythm-blue text-white hover:bg-rhythm-blue/90 text-xl px-10 py-5 rounded-2xl">
+                <AppleLogo className="w-7 h-7 mr-3" />Download the App
               </Button>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              viewport={{ once: true }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="text-xl px-10 py-5 rounded-2xl">
                 Upgrade to Premium
               </Button>
             </motion.div>

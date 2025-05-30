@@ -2,17 +2,17 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { 
   ArrowRight,
-  Mail
+  Mail,
+  Globe
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import FlySVG from './FlySVG';
 
 const AboutSection = () => {
   return (
     <Section>
       <div className="relative">
-        <Container className="max-w-4xl">
+        <Container className="max-w-4xl pb-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -41,8 +41,15 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="glass-card rounded-2xl p-8 mb-4"
+            className="glass-card rounded-2xl p-8 mb-4 relative overflow-hidden"
           >
+            {/* Animated lines for light outline */}
+            <div className="absolute inset-0 pointer-events-none z-20">
+              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-blue/30 to-transparent animate-pulse"></div>
+              <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-coral/20 to-transparent animate-pulse" style={{ animationDelay: '1s' }}></div>
+              <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/30 to-transparent animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+              <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/30 to-transparent animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+            </div>
             <h3 className="text-2xl font-semibold mb-6 text-center">Our Mission</h3>
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p>
@@ -63,9 +70,8 @@ const AboutSection = () => {
                   className="bg-rhythm-blue hover:bg-rhythm-blue/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 px-8 py-4 rounded-xl text-lg"
                   onClick={() => window.open('https://flyonthewalldev.com', '_blank')}
                 >
-                  <FlySVG isLanded={false} className="w-20 h-20" variant="white" />
+                  <Globe className="w-7 h-7" />
                   Visit our studio
-                  <ArrowRight className="w-5 h-5" />
                 </Button>
               </motion.div>
             </div>
