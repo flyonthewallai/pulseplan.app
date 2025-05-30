@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 import { Github, Globe } from "lucide-react";
 
@@ -10,7 +11,7 @@ const Footer = () => {
       links: [
         { name: "Features", href: "#features" },
         { name: "Pricing", href: "#pricing" },
-        { name: "Ambassador", href: "/ambassador" },
+        { name: "Ambassador", href: "/ambassador", isRouterLink: true },
         { name: "About", href: "#about" },
       ]
     },
@@ -66,12 +67,21 @@ const Footer = () => {
               <ul className="space-y-2">
                 {group.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    <a 
-                      href={link.href} 
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                    >
-                      {link.name}
-                    </a>
+                    {link.isRouterLink ? (
+                      <Link 
+                        to={link.href} 
+                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      >
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a 
+                        href={link.href} 
+                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      >
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

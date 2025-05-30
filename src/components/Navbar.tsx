@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 
@@ -18,14 +19,14 @@ const Navbar = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-lg shadow-md' : ''}`}>
       <Container>
         <div className="h-16 flex items-center justify-between py-4">
-          <a href="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <span className="text-2xl font-bold">PulsePlan</span>
-          </a>
+          </Link>
           
           <nav className="hidden md:flex gap-8">
             <a href="#features" className="hover:text-rhythm-blue transition-colors">Features</a>
             <a href="#pricing" className="hover:text-rhythm-blue transition-colors">Pricing</a>
-            <a href="/ambassador" className="hover:text-rhythm-blue transition-colors">Ambassador</a>
+            <Link to="/ambassador" className="hover:text-rhythm-blue transition-colors">Ambassador</Link>
             <a href="#about" className="hover:text-rhythm-blue transition-colors">About</a>
           </nav>
           
