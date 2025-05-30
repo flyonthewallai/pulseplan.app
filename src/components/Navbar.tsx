@@ -26,7 +26,7 @@ const Navbar = () => {
           <nav className="hidden md:flex gap-8">
             <a href="#features" className="hover:text-rhythm-blue transition-colors">Features</a>
             <a href="#pricing" className="hover:text-rhythm-blue transition-colors">Pricing</a>
-            <Link to="/ambassador" className="hover:text-rhythm-blue transition-colors">Ambassador</Link>
+            <Link to="/ambassadors" className="hover:text-rhythm-blue transition-colors">Ambassadors</Link>
             <a href="#about" className="hover:text-rhythm-blue transition-colors">About</a>
           </nav>
           

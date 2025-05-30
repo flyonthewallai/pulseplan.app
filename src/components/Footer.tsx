@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 import { Github, Globe } from "lucide-react";
@@ -11,7 +10,7 @@ const Footer = () => {
       links: [
         { name: "Features", href: "#features" },
         { name: "Pricing", href: "#pricing" },
-        { name: "Ambassador", href: "/ambassador", isRouterLink: true },
+        { name: "Ambassadors", href: "/ambassadors", isRouterLink: true },
         { name: "About", href: "#about" },
       ]
     },
@@ -28,7 +27,7 @@ const Footer = () => {
       links: [
         { name: "About Us", href: "#about" },
         { name: "Contact", href: "https://flyonthewalldev.com/#contact" },
-        { name: "Terms", href: "#" },
+        { name: "Terms", href: "/terms#" },
       ]
     }
   ];
@@ -38,19 +37,14 @@ const Footer = () => {
       <Container>
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <h3 className="text-2xl font-bold text-gradient-lavender mb-4">
                 PulsePlan
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 AI-powered academic planning that adapts to your rhythm.
               </p>
-              <div className="flex gap-4 mt-4">
+              <div className="flex gap-2 mt-4">
                 <a href="https://github.com/flyonthewalldev" target="_blank" rel="noopener noreferrer" aria-label="Fly on the Wall GitHub">
                   <Github className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
                 </a>
@@ -58,7 +52,7 @@ const Footer = () => {
                   <Globe className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
                 </a>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {footerLinks.map((group, index) => (
