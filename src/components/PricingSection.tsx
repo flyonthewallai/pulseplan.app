@@ -22,7 +22,7 @@ const PricingSection = () => {
     },
     {
       name: "Premium",
-      price: "$3",
+      price: "$3.99",
       period: "/month",
       description: "For serious students",
       features: [
@@ -35,7 +35,7 @@ const PricingSection = () => {
     },
     {
       name: "Lifetime",
-      price: "$49",
+      price: "$49.99",
       period: "",
       description: "One-time payment",
       features: [
@@ -70,62 +70,63 @@ const PricingSection = () => {
               key={plan.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className={`glass-card rounded-2xl p-8 relative group border border-white/5 hover:border-blue-100 transition-all duration-300 ${
-                plan.popular ? 'border-2 border-rhythm-blue/30' : ''
-              }`}
             >
-              {plan.popular && (
-                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
-                  <Badge className="bg-rhythm-blue text-white px-4 py-1 rounded-full flex items-center gap-1 shadow-lg">
-                    <Sparkles className="w-3 h-3" />
-                    Most Popular
-                  </Badge>
+              <div className={`glass-card rounded-2xl p-8 relative group border border-white/5 hover:border-blue-100 transition-all duration-300 ${
+                plan.popular ? 'border-2 border-rhythm-blue/30' : ''
+              }`}>
+                {plan.popular && (
+                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
+                    <Badge className="bg-rhythm-blue text-white px-4 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                      <Sparkles className="w-3 h-3" />
+                      Most Popular
+                    </Badge>
+                  </div>
+                )}
+
+                <div className="text-center mb-8">
+                  <h3 className="text-xl font-semibold mb-2">{plan.name}</h3>
+                  <div className="mb-2">
+                    <span className="text-4xl font-bold">{plan.price}</span>
+                    {plan.period && (
+                      <span className="text-muted-foreground ml-1">{plan.period}</span>
+                    )}
+                  </div>
+                  <p className="text-muted-foreground text-sm">{plan.description}</p>
                 </div>
-              )}
 
-              <div className="text-center mb-8">
-                <h3 className="text-xl font-semibold mb-2">{plan.name}</h3>
-                <div className="mb-2">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  {plan.period && (
-                    <span className="text-muted-foreground ml-1">{plan.period}</span>
-                  )}
-                </div>
-                <p className="text-muted-foreground text-sm">{plan.description}</p>
-              </div>
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center gap-3">
+                      <div className="w-5 h-5 bg-rhythm-blue/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3 text-rhythm-blue" />
+                      </div>
+                      <span className="text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center gap-3">
-                    <div className="w-5 h-5 bg-rhythm-blue/20 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3 h-3 text-rhythm-blue" />
-                    </div>
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <motion.div
-                whileHover={{ scale: 1.025 }}
-                whileTap={{ scale: 0.99 }}
-                className="w-full"
-              >
-                <Button
-                  className={`w-full ${
-                    plan.popular
-                      ? 'bg-rhythm-blue hover:bg-rhythm-blue/90 text-white'
-                      : 'bg-secondary hover:bg-secondary/90 text-secondary-foreground'
-                  }`}
+                <motion.div
+                  whileHover={{ scale: 1.025 }}
+                  whileTap={{ scale: 0.99 }}
+                  className="w-full"
                 >
-                  {plan.cta === 'Get Started Free' ? (
-                    <><Apple className="w-5 h-5 mr-2" />Download the App</>
-                  ) : (
-                    plan.cta
-                  )}
-                </Button>
-              </motion.div>
+                  <Button
+                    className={`w-full ${
+                      plan.popular
+                        ? 'bg-rhythm-blue hover:bg-rhythm-blue/90 text-white'
+                        : 'bg-secondary hover:bg-secondary/90 text-secondary-foreground'
+                    }`}
+                  >
+                    {plan.cta === 'Get Started Free' ? (
+                      <><Apple className="w-5 h-5 mr-2" />Download the App</>
+                    ) : (
+                      plan.cta
+                    )}
+                  </Button>
+                </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>

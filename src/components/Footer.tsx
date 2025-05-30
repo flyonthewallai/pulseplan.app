@@ -10,6 +10,7 @@ const Footer = () => {
       links: [
         { name: "Features", href: "#features" },
         { name: "Pricing", href: "#pricing" },
+        { name: "Ambassador", href: "/ambassador" },
         { name: "About", href: "#about" },
       ]
     },
@@ -32,7 +33,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="py-16 border-t border-border">
+    <footer className="py-12 border-t border-border">
       <Container>
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
@@ -59,43 +60,28 @@ const Footer = () => {
             </motion.div>
           </div>
 
-          {footerLinks.map((section, index) => (
-            <div key={section.title}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <h4 className="font-semibold mb-4">{section.title}</h4>
-                <ul className="space-y-2">
-                  {section.links.map((link) => (
-                    <li key={link.name}>
-                      <a
-                        href={link.href}
-                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                      >
-                        {link.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+          {footerLinks.map((group, index) => (
+            <div key={index}>
+              <h4 className="font-semibold mb-4">{group.title}</h4>
+              <ul className="space-y-2">
+                {group.links.map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <a 
+                      href={link.href} 
+                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-12 pt-8 border-t border-border text-center"
-        >
-          <p className="text-muted-foreground text-sm">
-            © {currentYear} PulsePlan. Built with ❤️ by Fly on the Wall.
-          </p>
-        </motion.div>
+        <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+          <p>© {currentYear} PulsePlan. Built with ❤️ by Fly on the Wall.</p>
+        </div>
       </Container>
     </footer>
   );
