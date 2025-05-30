@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container";
 import { IPhoneMockup } from "@/components/ui/iphone-mockup";
 import { GlowingOrb } from "@/components/ui/glowing-orb";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
   <svg 
@@ -23,80 +23,96 @@ const HeroSection = () => {
       <Container className="relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           <div className="flex-1 text-center lg:text-left">
-            {/* Floating Orb */}
+            {/* Main content container with staggered animation */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex justify-center lg:justify-start mb-8 mt-16 lg:mt-0"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: {
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 0.1
+                  }
+                }
+              }}
             >
-              <GlowingOrb size="lg" color="blue" />
-            </motion.div>
-            
-            {/* Main heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-            >
-              Let your schedule find its{" "}
-              <span className="text-gradient-blue">rhythm</span>.
-            </motion.h1>
-            
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl text-muted-foreground max-w-xl mb-4"
-            >
-              Built to make you extraordinarily productive, PulsePlan is the best way to manage your academic life with AI.
-            </motion.p>
-            
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <ButtonGroup className="justify-center lg:justify-start">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Button size="lg" className="bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg px-8 py-4 rounded-xl">
+              {/* Floating Orb */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="flex justify-center lg:justify-start mb-8 mt-16 lg:mt-0"
+              >
+                <GlowingOrb size="lg" color="blue" />
+              </motion.div>
+              
+              {/* Main heading */}
+              <motion.h1
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+              >
+                Let your schedule find its{" "}
+                <span className="text-gradient-blue">rhythm</span>.
+              </motion.h1>
+              
+              {/* Subtitle */}
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                className="text-xl text-muted-foreground max-w-xl mb-4"
+              >
+                Built to make you extraordinarily productive, PulsePlan is the best way to manage your academic life with AI.
+              </motion.p>
+              
+              {/* CTA Buttons */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+              >
+                <ButtonGroup className="justify-center lg:justify-start">
+                  <Button 
+                    size="lg" 
+                    className="bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg px-8 py-4 rounded-xl transition-transform hover:scale-105 active:scale-95"
+                  >
                     <AppleLogo />Download the App
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Button variant="outline" size="lg" className="text-lg px-8 py-4 rounded-xl border-border hover:bg-accent">
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="text-lg px-8 py-4 rounded-xl border-border hover:bg-accent transition-transform hover:scale-105 active:scale-95"
+                  >
                     Upgrade to Premium
                     <ChevronRight className="ml-2 w-5 h-5" />
                   </Button>
-                </motion.div>
-              </ButtonGroup>
-            </motion.div>
+                </ButtonGroup>
+              </motion.div>
 
-            {/* Trust indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-center lg:text-left mt-12"
-            >
-              <p className="text-sm text-muted-foreground mb-4">Trusted by students at</p>
-              <div className="flex flex-wrap justify-center lg:justify-start items-center gap-8 opacity-60">
-                <span className="text-lg font-medium">CU Boulder</span>
-                <span className="text-lg font-medium">LSU</span>
-                <span className="text-lg font-medium">Nebraska</span>
-                <span className="text-lg font-medium">GCU</span>
-                <span className="text-lg font-medium">CSU</span>
-              </div>
+              {/* Trust indicators */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1 }
+                }}
+                className="text-center lg:text-left mt-12"
+              >
+                <p className="text-sm text-muted-foreground mb-4">Trusted by students at</p>
+                <div className="flex flex-wrap justify-center lg:justify-start items-center gap-8 opacity-60">
+                  <span className="text-lg font-medium">CU Boulder</span>
+                  <span className="text-lg font-medium">LSU</span>
+                  <span className="text-lg font-medium">Nebraska</span>
+                  <span className="text-lg font-medium">GCU</span>
+                  <span className="text-lg font-medium">CSU</span>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
           
@@ -104,7 +120,7 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <IPhoneMockup />
             </motion.div>
@@ -112,10 +128,10 @@ const HeroSection = () => {
         </div>
       </Container>
       
-      {/* Background decorative elements */}
+      {/* Optimized background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-rhythm-blue/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-rhythm-blue/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-rhythm-blue/5 rounded-full filter blur-2xl transform-gpu"></div>
+        <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-rhythm-blue/5 rounded-full filter blur-2xl transform-gpu"></div>
       </div>
     </section>
   );
