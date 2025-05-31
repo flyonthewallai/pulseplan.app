@@ -87,7 +87,7 @@ const TermsOfService = () => {
                     <h2 className="text-2xl font-semibold mb-4">6. Intellectual Property</h2>
                     <p>
                       All content, features, and functionality of the App, including but not limited to text, 
-                      graphics, logos, and software, are the exclusive property of FlyOnTheWall and are protected 
+                      graphics, logos, and software, are the exclusive property of Fly on the Wall and are protected 
                       by copyright and other intellectual property laws.
                     </p>
                   </section>
@@ -104,7 +104,7 @@ const TermsOfService = () => {
                   <section>
                     <h2 className="text-2xl font-semibold mb-4">8. Limitation of Liability</h2>
                     <p>
-                      In no event shall FlyOnTheWall be liable for any direct, indirect, incidental, special, 
+                      In no event shall Fly on the Wall be liable for any direct, indirect, incidental, special, 
                       or consequential damages arising from your use of the App.
                     </p>
                   </section>
