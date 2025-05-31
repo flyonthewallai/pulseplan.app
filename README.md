@@ -19,11 +19,11 @@ PulsePlan is an intelligent study planning platform that leverages AI to help st
 
 ```
 pulseplan.app/
-├── public/                 # Static assets
-│   ├── images/            # Image files
-│   └── favicon.svg        # Site favicon
+├── public/               # Static assets
+│   ├── images/           # Image files
+│   └── favicon.svg       # Site favicon
 ├── src/
-│   ├── components/        # React components
+│   ├── components/       # React components
 │   │   ├── ui/           # Reusable UI components (shadcn)
 │   │   └── ...           # Page-specific components
 │   ├── hooks/            # Custom React hooks
