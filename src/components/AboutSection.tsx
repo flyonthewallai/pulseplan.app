@@ -10,7 +10,7 @@ import { Section } from "@/components/ui/section";
 
 const AboutSection = () => {
   return (
-    <Section>
+    <Section className="pb-16">
       <div className="relative">
         <Container className="max-w-4xl pb-0">
           <motion.div
@@ -41,7 +41,7 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="glass-card rounded-2xl p-8 mb-4 relative overflow-hidden"
+            className="glass-card rounded-2xl p-8 mb-2 relative overflow-hidden"
           >
             {/* Animated lines for light outline */}
             <div className="absolute inset-0 pointer-events-none z-20">

@@ -1,10 +1,16 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const TermsOfService = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <div className="bg-grid noise">

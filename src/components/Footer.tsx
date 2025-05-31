@@ -1,17 +1,48 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 import { Github, Globe } from "lucide-react";
+import { useEffect } from "react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Handle scrolling to hash on route change
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.slice(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location]);
+
+  const handleSectionNavigation = (sectionId: string) => {
+    const isHomePage = location.pathname === '/';
+    
+    if (isHomePage) {
+      // If on home page, scroll directly to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on different page, navigate to home with hash
+      navigate(`/#${sectionId}`);
+    }
+  };
+
   const footerLinks = [
     {
       title: "Product",
       links: [
-        { name: "Features", href: "#features" },
-        { name: "Pricing", href: "#pricing" },
+        { name: "Features", sectionId: "features" },
+        { name: "Pricing", sectionId: "pricing" },
         { name: "Ambassadors", href: "/ambassadors", isRouterLink: true },
-        { name: "About", href: "#about" },
+        { name: "About", sectionId: "about" },
       ]
     },
     {
@@ -25,22 +56,28 @@ const Footer = () => {
     {
       title: "Company",
       links: [
-        { name: "About Us", href: "#about" },
-        { name: "Contact", href: "https://flyonthewalldev.com/#contact" },
-        { name: "Terms", href: "/terms#" },
+        { name: "About Us", sectionId: "about" },
+        { name: "Contact", href: "https://flyonthewalldev.com/#contact", isExternal: true },
+        { name: "Terms", href: "/terms", isRouterLink: true },
       ]
     }
   ];
 
   return (
-    <footer className="py-12 border-t border-border">
+    <footer className="py-8 border-t border-border">
       <Container>
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <div>
-              <h3 className="text-2xl font-bold text-gradient-lavender mb-4">
-                PulsePlan
-              </h3>
+              <Link 
+                to="/" 
+                className="inline-block"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                <h3 className="text-2xl font-bold text-gradient-lavender mb-4">
+                  PulsePlan
+                </h3>
+              </Link>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 AI-powered academic planning that adapts to your rhythm.
               </p>
@@ -61,13 +98,29 @@ const Footer = () => {
               <ul className="space-y-2">
                 {group.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    {link.isRouterLink ? (
+                    {link.sectionId ? (
+                      <button
+                        onClick={() => handleSectionNavigation(link.sectionId)}
+                        className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
+                      >
+                        {link.name}
+                      </button>
+                    ) : link.isRouterLink ? (
                       <Link 
                         to={link.href} 
                         className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                       >
                         {link.name}
                       </Link>
+                    ) : link.isExternal ? (
+                      <a 
+                        href={link.href} 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      >
+                        {link.name}
+                      </a>
                     ) : (
                       <a 
                         href={link.href} 
@@ -83,7 +136,7 @@ const Footer = () => {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+        <div className="mt-8 pt-6 border-t border-border text-center text-sm text-muted-foreground">
           <p>© {currentYear} PulsePlan. Built with ❤️ by Fly on the Wall.</p>
         </div>
       </Container>
