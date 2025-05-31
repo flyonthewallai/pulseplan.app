@@ -41,7 +41,7 @@ const Footer = () => {
       links: [
         { name: "Features", sectionId: "features" },
         { name: "Pricing", sectionId: "pricing" },
-        { name: "Ambassadors", href: "/ambassadors", isRouterLink: true },
+        { name: "Ambassadors", href: "/ambassadors", isRouterLink: true, scrollToTop: true },
         { name: "About", sectionId: "about" },
       ]
     },
@@ -58,7 +58,7 @@ const Footer = () => {
       links: [
         { name: "About Us", sectionId: "about" },
         { name: "Contact", href: "https://flyonthewalldev.com/#contact", isExternal: true },
-        { name: "Terms", href: "/terms", isRouterLink: true },
+        { name: "Terms", href: "/terms", isRouterLink: true, scrollToTop: true },
       ]
     }
   ];
@@ -66,8 +66,8 @@ const Footer = () => {
   return (
     <footer className="py-8 border-t border-border">
       <Container>
-        <div className="grid md:grid-cols-4 gap-8">
-          <div className="md:col-span-1">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          <div className="col-span-2 md:col-span-1">
             <div>
               <Link 
                 to="/" 
@@ -109,6 +109,7 @@ const Footer = () => {
                       <Link 
                         to={link.href} 
                         className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                        onClick={link.scrollToTop ? () => window.scrollTo(0, 0) : undefined}
                       >
                         {link.name}
                       </Link>

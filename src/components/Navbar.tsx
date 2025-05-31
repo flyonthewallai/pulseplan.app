@@ -68,7 +68,13 @@ const Navbar = () => {
             >
               Pricing
             </button>
-            <Link to="/ambassadors" className="hover:text-rhythm-blue transition-colors">Ambassadors</Link>
+            <Link 
+              to="/ambassadors" 
+              className="hover:text-rhythm-blue transition-colors"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              Ambassadors
+            </Link>
             <button 
               onClick={() => handleSectionNavigation('about')}
               className="hover:text-rhythm-blue transition-colors"
@@ -78,7 +84,16 @@ const Navbar = () => {
           </nav>
           
           <div className="flex gap-2">
-            <Button variant="ghost" size="sm">Upgrade</Button>
+            {/* Mobile Ambassadors link */}
+            <Link 
+              to="/ambassadors" 
+              className="md:hidden hover:text-rhythm-blue transition-colors px-3 py-2 text-sm font-medium"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              Ambassadors
+            </Link>
+            {/* Desktop Upgrade button */}
+            <Button variant="ghost" size="sm" className="hidden md:inline-flex">Upgrade</Button>
             <Button variant="default" size="sm" className="bg-rhythm-blue hover:bg-rhythm-blue/90">Get the App</Button>
           </div>
         </div>
