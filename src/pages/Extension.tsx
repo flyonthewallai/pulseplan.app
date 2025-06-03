@@ -235,10 +235,10 @@ const Extension = () => {
             <h2 className="text-4xl font-bold mb-8 text-white">Install Now</h2>
             <Button
               asChild
-              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-12 py-6 text-xl rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 mb-6"
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-6 py-3 md:px-12 md:py-6 text-base md:text-xl rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 mb-6"
             >
               <a href="#" target="_blank" rel="noopener noreferrer">
-                <Chrome className="mr-3 w-6 h-6" />
+                <Chrome className="mr-3 w-5 h-5 md:w-6 md:h-6" />
                 Chrome Web Store Button (Install Extension)
               </a>
             </Button>

@@ -166,14 +166,14 @@ const Navbar = () => {
                         <Link
                           to={link.to}
                           onClick={handleLinkClick}
-                          className="block text-lg font-medium py-3 px-4 hover:text-rhythm-blue hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                          className="block text-lg font-medium py-3 px-4 hover:text-rhythm-blue hover:bg-gray-800 rounded-lg transition-colors"
                         >
                           {link.label}
                         </Link>
                       ) : (
                         <button
                           onClick={link.action}
-                          className="block text-lg font-medium py-3 px-4 hover:text-rhythm-blue hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors w-full text-left"
+                          className="block text-lg font-medium py-3 px-4 hover:text-rhythm-blue hover:bg-gray-800 rounded-lg transition-colors w-full text-left"
                         >
                           {link.label}
                         </button>
