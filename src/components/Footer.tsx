@@ -41,16 +41,8 @@ const Footer = () => {
       links: [
         { name: "Features", sectionId: "features" },
         { name: "Pricing", sectionId: "pricing" },
+        { name: "Extension", href: "/extension", isRouterLink: true, scrollToTop: true },
         { name: "Ambassadors", href: "/ambassadors", isRouterLink: true, scrollToTop: true },
-        { name: "About", sectionId: "about" },
-      ]
-    },
-    {
-      title: "Resources",
-      links: [
-        { name: "Blog", href: "#" },
-        { name: "Help Center", href: "#" },
-        { name: "Privacy", href: "#" },
       ]
     },
     {
@@ -58,7 +50,14 @@ const Footer = () => {
       links: [
         { name: "About Us", sectionId: "about" },
         { name: "Contact", href: "https://flyonthewalldev.com/#contact", isExternal: true },
+        { name: "Blog", href: "#" },
+      ]
+    },
+    {
+      title: "Legal",
+      links: [
         { name: "Terms", href: "/terms", isRouterLink: true, scrollToTop: true },
+        { name: "Privacy", href: "#" },
       ]
     }
   ];
