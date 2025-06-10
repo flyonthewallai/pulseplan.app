@@ -4,6 +4,12 @@ import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { FeatureCard } from "@/components/ui/feature-card";
 import { GlowingOrb } from "@/components/ui/glowing-orb";
+import { AnimatedBorder } from "@/components/ui/animated-border";
+import { 
+  fadeInUp, 
+  staggerContainer, 
+  viewportConfig 
+} from "@/lib/animation-configs";
 
 const features = [
   {
@@ -36,10 +42,10 @@ const FeaturesSection = () => {
     <Section className="relative bg-secondary/20 backdrop-blur-sm">
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInUp}
+          viewport={viewportConfig}
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold">Powerful Features</h2>
@@ -48,14 +54,18 @@ const FeaturesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          variants={staggerContainer}
+          viewport={viewportConfig}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
+        >
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="will-change-transform"
             >
               <FeatureCard
                 icon={feature.icon}
@@ -64,28 +74,23 @@ const FeaturesSection = () => {
               />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Full-width Real-time Adaptation Feature */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="relative glass-card rounded-2xl p-8 md:p-12 overflow-hidden"
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInUp}
+          viewport={viewportConfig}
+          className="relative glass-card rounded-2xl p-8 md:p-12 overflow-hidden will-change-transform"
         >
-          {/* Animated lines */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-blue/50 to-transparent animate-pulse"></div>
-            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-coral/50 to-transparent animate-pulse" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/50 to-transparent animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-            <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/50 to-transparent animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-          </div>
+          {/* Optimized animated border */}
+          <AnimatedBorder intensity="normal" color="mixed" />
           
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
             <div className="flex-shrink-0">
               <div className="w-16 h-16 glass-card rounded-full flex items-center justify-center">
-                <RefreshCw className="w-8 h-8 text-rhythm-blue animate-spin" style={{ animationDuration: '3s' }} />
+                <RefreshCw className="w-8 h-8 text-rhythm-blue animate-spin" style={{ animationDuration: '4s' }} />
               </div>
             </div>
             <div className="text-center md:text-left">
@@ -98,8 +103,23 @@ const FeaturesSection = () => {
         </motion.div>
       </Container>
 
+      {/* Optimized background elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-rhythm-blue/10 rounded-full filter blur-3xl"></div>
+        <motion.div 
+          className="absolute top-1/4 right-1/4 w-64 h-64 bg-rhythm-blue/5 rounded-full will-change-transform"
+          style={{
+            filter: "blur(40px)",
+            transform: "translateZ(0)",
+          }}
+          animate={{
+            y: [-10, 10, -10],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
       </div>
     </Section>
   );

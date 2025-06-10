@@ -4,3 +4,6 @@ package-lock.json
 
 # Distribution
 dist/
+
+# Environment variables
+.env

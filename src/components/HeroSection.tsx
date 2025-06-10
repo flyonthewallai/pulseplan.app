@@ -4,7 +4,16 @@ import { Container } from "@/components/ui/container";
 import { IPhoneMockup } from "@/components/ui/iphone-mockup";
 import { GlowingOrb } from "@/components/ui/glowing-orb";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { 
+  fadeInUp, 
+  fadeInScale, 
+  staggerContainer, 
+  hoverScale, 
+  tapScale, 
+  viewportConfig,
+  backgroundFloat
+} from "@/lib/animation-configs";
 
 const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
   <svg 
@@ -23,25 +32,16 @@ const HeroSection = () => {
       <Container className="relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           <div className="flex-1 text-center lg:text-left">
-            {/* Main content container with staggered animation */}
+            {/* Main content container with optimized staggered animation */}
             <motion.div
               initial="hidden"
               animate="visible"
-              variants={{
-                visible: {
-                  transition: {
-                    staggerChildren: 0.1,
-                    delayChildren: 0.1
-                  }
-                }
-              }}
+              variants={staggerContainer}
+              className="will-change-transform"
             >
               {/* Floating Orb */}
               <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
-                }}
+                variants={fadeInUp}
                 className="flex justify-center lg:justify-start mb-8 mt-16 lg:mt-0"
               >
                 <GlowingOrb size="lg" color="blue" />
@@ -49,11 +49,8 @@ const HeroSection = () => {
               
               {/* Main heading */}
               <motion.h1
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
-                }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+                variants={fadeInUp}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 will-change-transform"
               >
                 Let your schedule find its{" "}
                 <span className="text-gradient-blue">rhythm</span>.
@@ -61,10 +58,7 @@ const HeroSection = () => {
               
               {/* Subtitle */}
               <motion.p
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
-                }}
+                variants={fadeInUp}
                 className="text-xl text-muted-foreground max-w-xl mb-4"
               >
                 Built to make you extraordinarily productive, PulsePlan is the best way to manage your academic life with AI.
@@ -72,36 +66,43 @@ const HeroSection = () => {
               
               {/* CTA Buttons */}
               <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
-                }}
+                variants={fadeInUp}
+                className="will-change-transform"
               >
                 <ButtonGroup className="justify-center lg:justify-start">
-                  <Button 
-                    size="lg" 
-                    className="bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg px-8 py-4 rounded-xl transition-transform hover:scale-105 active:scale-95"
+                  <motion.div
+                    whileHover={hoverScale}
+                    whileTap={tapScale}
+                    className="will-change-transform"
                   >
-                    <AppleLogo />Download the App
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="text-lg px-8 py-4 rounded-xl border-border hover:bg-accent transition-transform hover:scale-105 active:scale-95"
+                    <Button 
+                      size="lg" 
+                      className="bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg px-8 py-4 rounded-xl transition-colors duration-200"
+                    >
+                      <AppleLogo />Download the App
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </Button>
+                  </motion.div>
+                  <motion.div
+                    whileHover={hoverScale}
+                    whileTap={tapScale}
+                    className="will-change-transform"
                   >
-                    Upgrade to Premium
-                    <ChevronRight className="ml-2 w-5 h-5" />
-                  </Button>
+                    <Button 
+                      variant="outline" 
+                      size="lg" 
+                      className="text-lg px-8 py-4 rounded-xl border-border hover:bg-accent transition-colors duration-200"
+                    >
+                      Upgrade to Premium
+                      <ChevronRight className="ml-2 w-5 h-5" />
+                    </Button>
+                  </motion.div>
                 </ButtonGroup>
               </motion.div>
 
               {/* Trust indicators */}
               <motion.div
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: { opacity: 1 }
-                }}
+                variants={fadeInUp}
                 className="text-center lg:text-left mt-12"
               >
                 <p className="text-sm text-muted-foreground mb-4">Trusted by students at</p>
@@ -118,9 +119,10 @@ const HeroSection = () => {
           
           <div className="flex-1 w-full max-w-md mx-auto lg:mx-0">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              variants={fadeInScale}
+              initial="hidden"
+              animate="visible"
+              className="will-change-transform"
             >
               <IPhoneMockup />
             </motion.div>
@@ -130,8 +132,25 @@ const HeroSection = () => {
       
       {/* Optimized background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-rhythm-blue/5 rounded-full filter blur-2xl transform-gpu"></div>
-        <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-rhythm-blue/5 rounded-full filter blur-2xl transform-gpu"></div>
+        <motion.div 
+          variants={backgroundFloat}
+          animate="float"
+          className="absolute top-1/2 left-1/4 w-64 h-64 bg-rhythm-blue/3 rounded-full will-change-transform"
+          style={{
+            filter: "blur(40px)",
+            transform: "translateZ(0)",
+          }}
+        />
+        <motion.div 
+          variants={backgroundFloat}
+          animate="float"
+          className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-rhythm-blue/3 rounded-full will-change-transform"
+          style={{
+            filter: "blur(40px)", 
+            transform: "translateZ(0)",
+            animationDelay: "2s",
+          }}
+        />
       </div>
     </section>
   );

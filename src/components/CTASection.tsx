@@ -5,6 +5,13 @@ import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { GlowingOrb } from '@/components/ui/glowing-orb';
 import { motion } from 'framer-motion';
+import { 
+  fadeInUp, 
+  staggerContainer, 
+  hoverScale, 
+  tapScale, 
+  viewportConfig 
+} from '@/lib/animation-configs';
 
 const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
   <svg 
@@ -22,66 +29,95 @@ export const CTASection = () => {
     <Section className="relative">
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          viewport={{ once: true }}
+          initial="hidden"
+          whileInView="visible"
+          variants={staggerContainer}
+          viewport={viewportConfig}
           className="max-w-3xl mx-auto text-center"
         >
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            viewport={{ once: true }}
+            variants={fadeInUp}
             className="relative inline-block mb-6"
           >
             <GlowingOrb size="md" className="mx-auto" color="blue" />
           </motion.div>
+          
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+            variants={fadeInUp}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight will-change-transform"
           >
             Plan less. <span className="text-gradient-blue">Do more.</span>
           </motion.h2>
+          
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-            viewport={{ once: true }}
+            variants={fadeInUp}
             className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto"
           >
             Join students who are finding their academic rhythm
             with AI-powered scheduling that adapts to their real habits.
           </motion.p>
-          <ButtonGroup className="justify-center mt-8 gap-4">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
-              <Button size="lg" className="bg-rhythm-blue text-white hover:bg-rhythm-blue/90 text-xl px-10 py-5 rounded-2xl">
-                <AppleLogo className="w-7 h-7 mr-3" />Download the App
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
-              <Button size="lg" variant="outline" className="text-xl px-10 py-5 rounded-2xl">
-                Upgrade to Premium
-              </Button>
-            </motion.div>
-          </ButtonGroup>
+          
+          <motion.div
+            variants={fadeInUp}
+            className="mt-8"
+          >
+            <ButtonGroup className="justify-center gap-4">
+              <motion.div
+                whileHover={hoverScale}
+                whileTap={tapScale}
+                className="will-change-transform"
+              >
+                <Button size="lg" className="bg-rhythm-blue text-white hover:bg-rhythm-blue/90 text-xl px-10 py-5 rounded-2xl transition-colors duration-200">
+                  <AppleLogo className="w-7 h-7 mr-3" />Download the App
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={hoverScale}
+                whileTap={tapScale}
+                className="will-change-transform"
+              >
+                <Button size="lg" variant="outline" className="text-xl px-10 py-5 rounded-2xl transition-colors duration-200">
+                  Upgrade to Premium
+                </Button>
+              </motion.div>
+            </ButtonGroup>
+          </motion.div>
         </motion.div>
       </Container>
 
+      {/* Optimized background elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-rhythm-blue/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-rhythm-coral/10 rounded-full filter blur-3xl"></div>
+        <motion.div 
+          className="absolute top-1/3 left-1/4 w-64 h-64 bg-rhythm-blue/5 rounded-full will-change-transform"
+          style={{
+            filter: "blur(40px)",
+            transform: "translateZ(0)",
+          }}
+          animate={{
+            y: [-15, 15, -15],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-rhythm-coral/5 rounded-full will-change-transform"
+          style={{
+            filter: "blur(40px)",
+            transform: "translateZ(0)",
+          }}
+          animate={{
+            y: [15, -15, 15],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
       </div>
     </Section>
   );

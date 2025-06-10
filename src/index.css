@@ -103,61 +103,69 @@
 }
 
 @layer utilities {
+  /* Optimized keyframes with GPU acceleration */
   @keyframes fade-in {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translate3d(0, 20px, 0);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
   @keyframes float {
     0%, 100% {
-      transform: translateY(0px);
+      transform: translate3d(0, 0, 0);
     }
     50% {
-      transform: translateY(-20px);
+      transform: translate3d(0, -20px, 0);
     }
   }
 
   @keyframes pulse-glow {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+      opacity: 0.8;
+      box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
     }
     50% {
-      box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+      opacity: 1;
+      box-shadow: 0 0 30px rgba(96, 165, 250, 0.6);
     }
   }
 
+  /* Optimized animation classes */
   .animate-fade-in {
-    animation: fade-in 0.6s ease-out forwards;
+    animation: fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    will-change: transform, opacity;
   }
 
   .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform;
   }
 
   .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+    animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: opacity, box-shadow;
+  }
+
+  /* Reduced delay classes for snappier animations */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
   }
 
   .animation-delay-300 {
     animation-delay: 300ms;
   }
 
-  .animation-delay-600 {
-    animation-delay: 600ms;
-  }
-
-  .animation-delay-900 {
-    animation-delay: 900ms;
-  }
-
-  .animation-delay-1000 {
-    animation-delay: 1000ms;
+  .animation-delay-400 {
+    animation-delay: 400ms;
   }
 
   .text-gradient {
@@ -212,9 +220,40 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
   }
 
-  /* Smooth transitions for all interactive elements */
+  /* Optimized transitions for interactive elements */
   button, .card, a {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: auto;
+  }
+
+  /* Performance optimizations */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Enable hardware acceleration for key elements */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .will-change-auto {
+    will-change: auto;
+  }
+  
+  /* Optimize animations for performance */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   /* Hide scrollbar when not in use */

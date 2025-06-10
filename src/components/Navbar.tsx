@@ -2,6 +2,19 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { fadeInUp } from "@/lib/animation-configs";
+
+const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
+  <svg 
+    className={className} 
+    viewBox="0 0 24 24" 
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M17.05 20.28c-.98.95-2.05.88-3.08.41-1.09-.47-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.41C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.19 2.31-.89 3.51-.84 1.54.07 2.7.61 3.44 1.57-3.14 1.88-2.29 5.13.22 6.41-.65 1.29-1.52 2.58-2.25 4.03zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+  </svg>
+);
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -44,60 +57,97 @@ const Navbar = () => {
   };
   
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-lg shadow-md' : ''}`}>
-      <Container>
-        <div className="h-16 flex items-center justify-between py-4">
-          <Link 
-            to="/" 
-            className="flex items-center space-x-2"
-            onClick={() => window.scrollTo(0, 0)}
-          >
-            <span className="text-2xl font-bold">PulsePlan</span>
-          </Link>
-          
-          <nav className="hidden md:flex gap-8">
-            <button 
-              onClick={() => handleSectionNavigation('features')}
-              className="hover:text-rhythm-blue transition-colors"
-            >
-              Features
-            </button>
-            <button 
-              onClick={() => handleSectionNavigation('pricing')}
-              className="hover:text-rhythm-blue transition-colors"
-            >
-              Pricing
-            </button>
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 pt-6">
+      <motion.nav
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+        className={`mx-auto max-w-6xl transition-all duration-300 rounded-2xl will-change-transform ${
+          scrolled 
+            ? 'bg-background/85 backdrop-blur-xl shadow-xl border border-white/20' 
+            : 'bg-background/60 backdrop-blur-lg'
+        }`}
+      >
+        <Container className="px-8">
+          <div className="h-16 flex items-center justify-between">
             <Link 
-              to="/ambassadors" 
-              className="hover:text-rhythm-blue transition-colors"
+              to="/" 
+              className="flex items-center space-x-2 group"
               onClick={() => window.scrollTo(0, 0)}
             >
-              Ambassadors
+              <span className="text-2xl font-bold transition-colors group-hover:text-rhythm-blue">
+                PulsePlan
+              </span>
             </Link>
-            <button 
-              onClick={() => handleSectionNavigation('about')}
-              className="hover:text-rhythm-blue transition-colors"
-            >
-              About
-            </button>
-          </nav>
-          
-          <div className="flex gap-2">
-            {/* Mobile Ambassadors link */}
-            <Link 
-              to="/ambassadors" 
-              className="md:hidden hover:text-rhythm-blue transition-colors px-3 py-2 text-sm font-medium"
-              onClick={() => window.scrollTo(0, 0)}
-            >
-              Ambassadors
-            </Link>
-            {/* Desktop Upgrade button */}
-            <Button variant="ghost" size="sm" className="hidden md:inline-flex">Upgrade</Button>
-            <Button variant="default" size="sm" className="bg-rhythm-blue hover:bg-rhythm-blue/90">Get the App</Button>
+            
+            <nav className="hidden md:flex items-center gap-2">
+              <button 
+                onClick={() => handleSectionNavigation('features')}
+                className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
+              >
+                Features
+              </button>
+              <button 
+                onClick={() => handleSectionNavigation('pricing')}
+                className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
+              >
+                Pricing
+              </button>
+              <Link 
+                to="/ambassadors" 
+                className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                Ambassadors
+              </Link>
+              <button 
+                onClick={() => handleSectionNavigation('about')}
+                className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
+              >
+                About
+              </button>
+            </nav>
+            
+            <div className="flex items-center gap-3">
+              {/* Mobile Ambassadors link */}
+              <Link 
+                to="/ambassadors" 
+                className="md:hidden px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                Ambassadors
+              </Link>
+              
+              {/* Desktop buttons */}
+              <div className="hidden md:flex items-center gap-3">
+                <Button 
+                  variant="ghost" 
+                  size="default" 
+                  className="text-base font-medium hover:bg-white/8 border-0 px-5"
+                >
+                  Upgrade
+                </Button>
+                <Button 
+                  size="default" 
+                  className="bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200 px-6"
+                >
+                  <AppleLogo className="w-5 h-5" />
+                  Get the App
+                </Button>
+              </div>
+              
+              {/* Mobile button */}
+              <Button 
+                size="default" 
+                className="md:hidden bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200 px-5"
+              >
+                <AppleLogo className="w-4 h-4" />
+                Get App
+              </Button>
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </motion.nav>
     </header>
   );
 };
