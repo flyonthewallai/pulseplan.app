@@ -72,11 +72,10 @@ export const CTASection = () => {
                 </Button>
               </motion.div>
               <motion.div
-                whileHover={hoverScale}
                 whileTap={tapScale}
                 className="will-change-transform"
               >
-                <Button size="lg" variant="outline" className="text-xl px-10 py-5 rounded-2xl transition-colors duration-200">
+                <Button size="lg" variant="outline" className="text-xl px-10 py-5 rounded-2xl bg-black hover:bg-black/90 text-white border border-white/20 hover:border-white/60 transition-all duration-200">
                   Upgrade to Premium
                 </Button>
               </motion.div>

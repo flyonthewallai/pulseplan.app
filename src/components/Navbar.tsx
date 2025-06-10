@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp } from "@/lib/animation-configs";
+import { Menu, X } from "lucide-react";
 
 const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
   <svg 
@@ -114,6 +115,13 @@ const Navbar = () => {
                 Pricing
               </button>
               <Link 
+                to="/extension" 
+                className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                Extension
+              </Link>
+              <Link 
                 to="/ambassadors" 
                 className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
                 onClick={() => window.scrollTo(0, 0)}
@@ -129,23 +137,14 @@ const Navbar = () => {
             </nav>
             
             <div className="flex items-center gap-3">
-              {/* Mobile Ambassadors link */}
-              <Link 
-                to="/ambassadors" 
-                className="md:hidden px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                Ambassadors
-              </Link>
-              
               {/* Desktop buttons */}
               <div className="hidden md:flex items-center gap-3">
                 <Button 
-                  variant="ghost" 
+                  variant="outline" 
                   size="default" 
-                  className="text-base font-medium hover:bg-white/8 border-0 px-5"
+                  className="text-base font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 px-5 transition-all duration-200"
                 >
-                  Upgrade
+                  Log In
                 </Button>
                 <Button 
                   size="default" 
@@ -156,18 +155,128 @@ const Navbar = () => {
                 </Button>
               </div>
               
-              {/* Mobile button */}
-              <Button 
-                size="default" 
-                className="md:hidden bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200 px-5"
+              {/* Optimized Mobile hamburger button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150 active:scale-95"
+                aria-label="Toggle mobile menu"
+                style={{ willChange: 'transform' }}
               >
-                <AppleLogo className="w-4 h-4" />
-                Get App
-              </Button>
+                <motion.div
+                  animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                >
+                  {isMobileMenuOpen ? (
+                    <X className="w-6 h-6" />
+                  ) : (
+                    <Menu className="w-6 h-6" />
+                  )}
+                </motion.div>
+              </button>
             </div>
           </div>
         </Container>
       </motion.nav>
+
+      {/* Optimized Mobile Menu Overlay */}
+      <AnimatePresence mode="wait">
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            className="fixed inset-0 z-40 md:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+            style={{ willChange: 'opacity' }}
+          >
+            <div className="absolute inset-0 bg-black/100" />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ 
+                type: 'spring', 
+                damping: 30, 
+                stiffness: 300,
+                duration: 0.2
+              }}
+              className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-background/98 border-l border-white/20 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+              style={{ willChange: 'transform' }}
+            >
+              <div className="flex flex-col h-full">
+                {/* Mobile menu header */}
+                <div className="flex items-center justify-between p-6 border-b border-white/10">
+                  <span className="text-xl font-bold">Menu</span>
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2 text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Mobile navigation links - Optimized */}
+                <nav className="flex-1 px-6 py-6 space-y-2">
+                  <button 
+                    onClick={() => handleSectionNavigation('features')}
+                    className="block w-full text-left px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
+                  >
+                    Features
+                  </button>
+                  <button 
+                    onClick={() => handleSectionNavigation('pricing')}
+                    className="block w-full text-left px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
+                  >
+                    Pricing
+                  </button>
+                  <Link 
+                    to="/extension" 
+                    className="block px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
+                    onClick={handleLinkClick}
+                  >
+                    Extension
+                  </Link>
+                  <Link 
+                    to="/ambassadors" 
+                    className="block px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
+                    onClick={handleLinkClick}
+                  >
+                    Ambassadors
+                  </Link>
+                  <button 
+                    onClick={() => handleSectionNavigation('about')}
+                    className="block w-full text-left px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
+                  >
+                    About
+                  </button>
+                </nav>
+
+                {/* Mobile menu buttons - Optimized */}
+                <div className="p-6 space-y-3 border-t border-white/10">
+                  <Button 
+                    variant="outline" 
+                    size="default" 
+                    className="w-full text-lg font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 py-3 transition-colors duration-150"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Log In
+                  </Button>
+                  <Button 
+                    size="default" 
+                    className="w-full bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg font-medium shadow-lg py-3 transition-colors duration-150"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <AppleLogo className="w-5 h-5" />
+                    Get the App
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

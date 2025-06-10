@@ -26,6 +26,8 @@ const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
   </svg>
 );
 
+
+
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8">
@@ -84,14 +86,13 @@ const HeroSection = () => {
                     </Button>
                   </motion.div>
                   <motion.div
-                    whileHover={hoverScale}
                     whileTap={tapScale}
                     className="will-change-transform"
                   >
                     <Button 
                       variant="outline" 
                       size="lg" 
-                      className="text-lg px-8 py-4 rounded-xl border-border hover:bg-accent transition-colors duration-200"
+                      className="text-lg px-8 py-4 rounded-xl bg-black hover:bg-black/90 text-white border border-white/20 hover:border-white/60 transition-all duration-200"
                     >
                       Upgrade to Premium
                       <ChevronRight className="ml-2 w-5 h-5" />

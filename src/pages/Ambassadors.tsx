@@ -16,6 +16,17 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { 
+  fadeInUp, 
+  fadeInScale, 
+  staggerContainer, 
+  slideInLeft, 
+  slideInRight,
+  hoverScale,
+  transitions,
+  viewportConfig,
+  optimizedPulse
+} from "@/lib/animation-configs";
 
 const Ambassador = () => {
   const valueCards = [
@@ -75,54 +86,112 @@ const Ambassador = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black text-white">
       <Navbar />
       
-      {/* Hero Section */}
+      {/* Enhanced Hero Section */}
       <section className="pt-32 pb-20 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-blue-500/10 rounded-full blur-xl"></div>
         <div className="absolute bottom-10 right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-xl"></div>
+        {/* Enhanced floating orbs */}
+        <motion.div 
+          className="absolute top-20 left-10 w-20 h-20 bg-blue-500/10 rounded-full blur-xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.3, 0.1],
+            x: [0, 20, 0],
+            y: [0, -10, 0]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-10 right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.15, 0.25, 0.15],
+            x: [0, -30, 0],
+            y: [0, 20, 0]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            viewport={viewportConfig}
           >
-            <div className="flex justify-center mb-6">
-              <Calendar className="w-16 h-16 text-blue-400" />
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Become a PulsePlan Ambassador
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Share the tool you love, earn lifetime access, and help students take back their time.
-            </p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+            <motion.div 
+              variants={fadeInScale}
+              className="flex justify-center mb-6"
             >
-              <Button
-                asChild
-                className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              <div className="relative">
+                <motion.div
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Calendar className="w-16 h-16 text-blue-400" />
+                </motion.div>
+                <motion.div
+                  className="absolute -inset-2 bg-blue-400/20 rounded-full blur-lg"
+                  animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              </div>
+            </motion.div>
+            
+            <motion.h1 
+              variants={fadeInUp}
+              className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              style={{ willChange: 'transform' }}
+            >
+              Become a PulsePlan Ambassador
+            </motion.h1>
+            
+            <motion.p 
+              variants={fadeInUp}
+              className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed"
+            >
+              Share the tool you love, earn lifetime access, and help students take back their time.
+            </motion.p>
+            
+            <motion.div variants={fadeInUp}>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
+                style={{ willChange: 'transform' }}
               >
-                <a href="https://www.notion.so/connergroth/2036b20844a880f7a065cc060a0014e3?pvs=106" target="_blank" rel="noopener noreferrer">
-                  Apply Now
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </a>
-              </Button>
+                <Button
+                  asChild
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-0"
+                >
+                  <a href="https://www.notion.so/connergroth/2036b20844a880f7a065cc060a0014e3?pvs=106" target="_blank" rel="noopener noreferrer">
+                    Apply Now
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </a>
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Why Join Section */}
-      <section className="py-20 px-4">
+      {/* Enhanced Why Join Section */}
+      <section className="py-20 px-4 bg-gray-900/30 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-6 text-white">Why Join?</h2>
@@ -132,51 +201,77 @@ const Ambassador = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            className="grid md:grid-cols-3 gap-8"
+          >
             {valueCards.map((card, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                variants={fadeInUp}
+                whileHover={hoverScale}
+                style={{ willChange: 'transform' }}
               >
-                <Card className="border border-gray-800 bg-gray-900/50 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full relative overflow-hidden">
-                  {/* Animated lines */}
+                <Card className="border border-gray-800/50 bg-gray-900/50 shadow-lg hover:shadow-xl transition-all duration-300 h-full relative overflow-hidden backdrop-blur-sm">
+                  {/* Enhanced border animations */}
                   <div className="absolute inset-0 pointer-events-none z-20">
-                    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-blue/30 to-transparent animate-pulse"></div>
-                    <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-coral/20 to-transparent animate-pulse" style={{ animationDelay: '1s' }}></div>
-                    <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/30 to-transparent animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                    <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/30 to-transparent animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+                    <motion.div 
+                      className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-blue/40 to-transparent"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 1, delay: index * 0.1 }}
+                    />
+                    <motion.div 
+                      className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-coral/30 to-transparent"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 1, delay: index * 0.1 + 0.2 }}
+                    />
                   </div>
+                  
                   <CardContent className="p-8 text-center relative z-10">
-                    <div className={`w-16 h-16 mx-auto mb-6 bg-gradient-to-r ${card.gradient} rounded-xl flex items-center justify-center`}>
-                      <card.icon className="w-8 h-8 text-white" />
-                    </div>
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={transitions.fast}
+                      className="mb-6"
+                    >
+                      <div className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${card.gradient} p-4 shadow-lg`}>
+                        <card.icon className="w-8 h-8 text-white" />
+                      </div>
+                    </motion.div>
                     <h3 className="text-xl font-bold mb-3 text-white">{card.title}</h3>
                     <p className="text-gray-300">{card.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* What You'll Do Section */}
+      {/* Enhanced What You'll Do Section */}
       <section className="py-20 px-4 bg-gray-900/30">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-6 text-white">What You'll Do</h2>
           </motion.div>
 
-          <div className="space-y-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            className="space-y-6"
+          >
             {[
               "Share PulsePlan in your school's private Snapchat story or other student networks",
               "Help us test features & give feedback",
@@ -184,100 +279,138 @@ const Ambassador = () => {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                variants={slideInLeft}
+                whileHover={hoverScale}
+                style={{ willChange: 'transform' }}
                 className="relative overflow-hidden"
               >
-                <div className="flex items-center space-x-4 p-6 bg-gray-900/50 border border-gray-800 rounded-xl shadow-md relative">
-                  {/* Animated lines */}
+                <div className="flex items-center space-x-4 p-6 bg-gray-900/50 border border-gray-800/50 rounded-xl shadow-md relative backdrop-blur-sm">
+                  {/* Enhanced border animations */}
                   <div className="absolute inset-0 pointer-events-none z-20">
-                    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-blue/30 to-transparent animate-pulse"></div>
-                    <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-coral/20 to-transparent animate-pulse" style={{ animationDelay: '1s' }}></div>
-                    <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/30 to-transparent animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                    <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/30 to-transparent animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+                    <motion.div 
+                      className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500/80 to-transparent"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 0.8, delay: index * 0.1 }}
+                    />
                   </div>
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 relative z-10">
+                  
+                  <motion.div
+                    className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
+                    whileHover={{ scale: 1.2, rotate: 90 }}
+                    transition={transitions.bouncy}
+                  >
                     <CheckCircle className="w-5 h-5 text-white" />
-                  </div>
+                  </motion.div>
                   <p className="text-lg text-gray-200 relative z-10">{item}</p>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* How It Works Section */}
+      {/* Enhanced How It Works Section */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-6 text-white">How It Works</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            className="grid md:grid-cols-3 gap-8"
+          >
             {steps.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                variants={fadeInUp}
+                whileHover={{ y: -5 }}
+                style={{ willChange: 'transform' }}
                 className="text-center"
               >
                 <div className="relative mb-8">
-                  <div className="w-20 h-20 mx-auto bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                  <motion.div 
+                    className="w-20 h-20 mx-auto bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center relative"
+                    whileHover={{ scale: 1.1 }}
+                    transition={transitions.bouncy}
+                  >
                     <step.icon className="w-8 h-8 text-white" />
-                  </div>
+                    <motion.div
+                      className="absolute -inset-1 bg-gradient-to-r from-blue-500/50 to-purple-500/50 rounded-full blur-md"
+                      animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
+                    />
+                  </motion.div>
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-white">{step.title}</h3>
                 <p className="text-gray-300">{step.description}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* FAQs Section */}
+      {/* Enhanced FAQs Section */}
       <section className="py-20 px-4 bg-gray-900/30">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-6 text-white">Frequently Asked Questions</h2>
           </motion.div>
 
-          <div className="space-y-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            className="space-y-6"
+          >
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                variants={fadeInUp}
+                whileHover={hoverScale}
+                style={{ willChange: 'transform' }}
               >
-                <Card className="border border-gray-800 bg-gray-900/50 shadow-md hover:shadow-lg transition-shadow duration-300 relative overflow-hidden">
-                  {/* Animated lines */}
+                <Card className="border border-gray-800/50 bg-gray-900/50 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden backdrop-blur-sm">
+                  {/* Enhanced border animations */}
                   <div className="absolute inset-0 pointer-events-none z-20">
-                    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-blue/30 to-transparent animate-pulse"></div>
-                    <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-coral/20 to-transparent animate-pulse" style={{ animationDelay: '1s' }}></div>
-                    <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/30 to-transparent animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                    <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-rhythm-blue/30 to-transparent animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+                    <motion.div 
+                      className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-blue/40 to-transparent"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 1, delay: index * 0.1 }}
+                    />
+                    <motion.div 
+                      className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-coral/30 to-transparent"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 1, delay: index * 0.1 + 0.2 }}
+                    />
                   </div>
                   <CardContent className="p-8 relative z-10">
                     <div className="flex items-start space-x-4">
-                      <MessageCircle className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                      <motion.div
+                        whileHover={{ scale: 1.2, rotate: 15 }}
+                        transition={transitions.fast}
+                      >
+                        <MessageCircle className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                      </motion.div>
                       <div>
                         <h3 className="text-lg font-bold mb-3 text-white">{faq.question}</h3>
                         <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
@@ -287,29 +420,35 @@ const Ambassador = () => {
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Call to Action Footer */}
+      {/* Enhanced Call to Action Footer */}
       <section className="py-16 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
           >
             <h2 className="text-4xl font-bold mb-6 text-white">Ready to join the team?</h2>
-            <Button
-              asChild
-              className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            <motion.div
+              whileHover={hoverScale}
+              whileTap={{ scale: 0.95 }}
+              style={{ willChange: 'transform' }}
             >
-              <a href="https://www.notion.so/connergroth/2036b20844a880f7a065cc060a0014e3?pvs=106" target="_blank" rel="noopener noreferrer">
-                Apply to be an Ambassador
-                <Users className="ml-2 w-5 h-5" />
-              </a>
-            </Button>
+              <Button
+                asChild
+                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+              >
+                <a href="https://www.notion.so/connergroth/2036b20844a880f7a065cc060a0014e3?pvs=106" target="_blank" rel="noopener noreferrer">
+                  Apply to be an Ambassador
+                  <Users className="ml-2 w-5 h-5" />
+                </a>
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </section>

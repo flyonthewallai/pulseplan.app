@@ -9,29 +9,29 @@ interface AnimatedBorderProps {
 
 const colorConfig = {
   blue: {
-    top: "rgba(96, 165, 250, 0.3)",
-    bottom: "rgba(96, 165, 250, 0.2)",
-    left: "rgba(96, 165, 250, 0.25)",
-    right: "rgba(96, 165, 250, 0.25)",
+    top: "rgba(96, 165, 250, 0.6)",
+    bottom: "rgba(96, 165, 250, 0.5)",
+    left: "rgba(96, 165, 250, 0.55)",
+    right: "rgba(96, 165, 250, 0.55)",
   },
   coral: {
-    top: "rgba(249, 115, 22, 0.3)",
-    bottom: "rgba(249, 115, 22, 0.2)",
-    left: "rgba(249, 115, 22, 0.25)",
-    right: "rgba(249, 115, 22, 0.25)",
+    top: "rgba(249, 115, 22, 0.6)",
+    bottom: "rgba(249, 115, 22, 0.5)",
+    left: "rgba(249, 115, 22, 0.55)",
+    right: "rgba(249, 115, 22, 0.55)",
   },
   mixed: {
-    top: "rgba(96, 165, 250, 0.3)",
-    bottom: "rgba(249, 115, 22, 0.2)",
-    left: "rgba(96, 165, 250, 0.25)",
-    right: "rgba(96, 165, 250, 0.25)",
+    top: "rgba(96, 165, 250, 0.6)",
+    bottom: "rgba(249, 115, 22, 0.5)",
+    left: "rgba(155, 135, 245, 0.55)",
+    right: "rgba(96, 165, 250, 0.55)",
   },
 };
 
 const intensityConfig = {
-  light: 0.3,
-  normal: 0.5,
-  strong: 0.7,
+  light: 0.6,
+  normal: 0.8,
+  strong: 1.0,
 };
 
 // Optimized animation variants

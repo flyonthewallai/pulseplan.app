@@ -22,7 +22,7 @@ const PricingSection = () => {
     },
     {
       name: "Premium",
-      price: "$3.99",
+      price: "$6.99",
       period: "/month",
       description: "For serious students",
       features: [
@@ -35,7 +35,7 @@ const PricingSection = () => {
     },
     {
       name: "Lifetime",
-      price: "$49.99",
+      price: "$79.99",
       period: "",
       description: "One-time payment",
       features: [
@@ -108,13 +108,14 @@ const PricingSection = () => {
                 </ul>
 
                 <motion.div
-                  whileHover={{ scale: 1.025 }}
                   whileTap={{ scale: 0.99 }}
                   className="w-full"
                 >
                   <Button
                     className={`w-full ${
-                      plan.popular
+                      plan.cta === 'Upgrade to Premium'
+                        ? 'bg-black hover:bg-black/90 text-white border border-white/20 hover:border-white/60 transition-all duration-200'
+                        : plan.popular
                         ? 'bg-rhythm-blue hover:bg-rhythm-blue/90 text-white'
                         : 'bg-secondary hover:bg-secondary/90 text-secondary-foreground'
                     }`}

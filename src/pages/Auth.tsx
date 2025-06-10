@@ -34,15 +34,6 @@ const GoogleLogo = ({ className = "w-6 h-6" }: { className?: string }) => (
   </svg>
 );
 
-const MicrosoftLogo = ({ className = "w-6 h-6" }: { className?: string }) => (
-  <div className={`${className} grid grid-cols-2 gap-0.5`}>
-    <div className="w-2.5 h-2.5 bg-[#f25022]"></div>
-    <div className="w-2.5 h-2.5 bg-[#7fba00]"></div>
-    <div className="w-2.5 h-2.5 bg-[#00a4ef]"></div>
-    <div className="w-2.5 h-2.5 bg-[#ffb900]"></div>
-  </div>
-);
-
 const AppleLogo = ({ className = "w-6 h-6" }: { className?: string }) => (
   <svg 
     className={className} 
@@ -59,7 +50,7 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
 
-  const handleOAuthSignIn = async (provider: 'google' | 'microsoft' | 'apple') => {
+  const handleOAuthSignIn = async (provider: 'google' | 'apple') => {
     setIsLoading(true);
     setLoadingProvider(provider);
     try {
@@ -67,9 +58,6 @@ const Auth = () => {
       switch (provider) {
         case 'google':
           result = await authHelpers.signInWithGoogle();
-          break;
-        case 'microsoft':
-          result = await authHelpers.signInWithMicrosoft();
           break;
         case 'apple':
           result = await authHelpers.signInWithApple();
@@ -125,7 +113,7 @@ const Auth = () => {
                     Try PulsePlan for free!
                   </CardTitle>
                   <p className="text-muted-foreground text-base">
-                    Log in with Google, Microsoft, or Apple.
+                    Log in with Google or Apple.
                   </p>
                 </CardHeader>
                 
@@ -134,7 +122,7 @@ const Auth = () => {
                    <Button
                      onClick={() => handleOAuthSignIn('google')}
                      disabled={isLoading}
-                     className="w-full h-12 bg-muted hover:bg-muted/80 text-foreground border border-border/50 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] relative"
+                     className="w-full h-12 bg-muted hover:bg-muted/80 text-foreground border border-border/50 transition-all duration-200"
                      variant="outline"
                    >
                      {loadingProvider === 'google' ? (
@@ -145,26 +133,11 @@ const Auth = () => {
                      Continue with Google
                    </Button>
 
-                                     {/* Microsoft */}
-                   <Button
-                     onClick={() => handleOAuthSignIn('microsoft')}
-                     disabled={isLoading}
-                     className="w-full h-12 bg-muted hover:bg-muted/80 text-foreground border border-border/50 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                     variant="outline"
-                   >
-                     {loadingProvider === 'microsoft' ? (
-                       <Loader2 className="w-6 h-6 mr-3 animate-spin" />
-                     ) : (
-                       <MicrosoftLogo className="w-6 h-6 mr-3" />
-                     )}
-                     Continue with Microsoft
-                   </Button>
-
                                      {/* Apple */}
                    <Button
                      onClick={() => handleOAuthSignIn('apple')}
                      disabled={isLoading}
-                     className="w-full h-12 bg-muted hover:bg-muted/80 text-foreground border border-border/50 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                     className="w-full h-12 bg-muted hover:bg-muted/80 text-foreground border border-border/50 transition-all duration-200"
                      variant="outline"
                    >
                      {loadingProvider === 'apple' ? (
@@ -199,7 +172,7 @@ const Auth = () => {
                     <Button
                       type="submit"
                       disabled={isLoading || !email}
-                      className="w-full h-12 bg-rhythm-blue hover:bg-rhythm-blue/90 text-white font-medium transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                      className="w-full h-12 bg-rhythm-blue hover:bg-rhythm-blue/90 text-white font-medium transition-all duration-200"
                     >
                       {isLoading && loadingProvider === null ? (
                         <div className="flex items-center gap-2">

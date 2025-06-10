@@ -14,7 +14,7 @@ import {
 const features = [
   {
     icon: <CalendarCheck className="w-8 h-8" />,
-    title: "Auto-sync with Canvas & Google Calendar",
+    title: "Auto-sync with Canvas & Calendars",
     description: "Seamlessly integrate with your existing tools to gather all your academic commitments in one place.",
   },
   {
@@ -22,7 +22,7 @@ const features = [
       <Brain className="w-8 h-8" />
       <GlowingOrb className="absolute -right-2 -top-2 w-4 h-4" color="blue" />
     </div>,
-    title: "Dynamic schedule with GPT-4o",
+    title: "Dynamic schedule with a Personalized AI Agent",
     description: "Advanced AI creates personalized study plans that adapt to your learning style and workload.",
   },
   {
@@ -84,14 +84,66 @@ const FeaturesSection = () => {
           viewport={viewportConfig}
           className="relative glass-card rounded-2xl p-8 md:p-12 overflow-hidden will-change-transform"
         >
-          {/* Optimized animated border */}
-          <AnimatedBorder intensity="normal" color="mixed" />
+          {/* Rainbow Outline Effect */}
+          <div className="absolute inset-0 pointer-events-none z-20">
+            <motion.div 
+              className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-blue/80 to-transparent"
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div 
+              className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rhythm-coral/70 to-transparent"
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            />
+            <motion.div 
+              className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-green-400/60 to-transparent"
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            />
+            <motion.div 
+              className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-purple-400/60 to-transparent"
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            />
+          </div>
           
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
             <div className="flex-shrink-0">
-              <div className="w-16 h-16 glass-card rounded-full flex items-center justify-center">
-                <RefreshCw className="w-8 h-8 text-rhythm-blue animate-spin" style={{ animationDuration: '4s' }} />
-              </div>
+              <motion.div 
+                className="w-16 h-16 glass-card rounded-full flex items-center justify-center relative"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              >
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <Calendar className="w-8 h-8 text-rhythm-blue" />
+                </motion.div>
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  animate={{
+                    boxShadow: [
+                      "0 0 0 0 rgba(96, 165, 250, 0.3)",
+                      "0 0 0 8px rgba(96, 165, 250, 0.1)",
+                      "0 0 0 0 rgba(96, 165, 250, 0.3)",
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </motion.div>
             </div>
             <div className="text-center md:text-left">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">Watch your calendar adapt in real-time</h3>

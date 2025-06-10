@@ -16,15 +16,6 @@ export const authHelpers = {
     })
   },
 
-  signInWithMicrosoft: () => {
-    return supabase.auth.signInWithOAuth({
-      provider: 'azure',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`
-      }
-    })
-  },
-
   signInWithApple: () => {
     return supabase.auth.signInWithOAuth({
       provider: 'apple',
