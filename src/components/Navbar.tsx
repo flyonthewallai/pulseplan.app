@@ -18,6 +18,7 @@ const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
@@ -43,7 +44,13 @@ const Navbar = () => {
     }
   }, [location]);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
+
   const handleSectionNavigation = (sectionId: string) => {
+    setIsMobileMenuOpen(false);
     if (isHomePage) {
       // If on home page, scroll directly to section
       const element = document.getElementById(sectionId);
@@ -55,6 +62,19 @@ const Navbar = () => {
       navigate(`/#${sectionId}`);
     }
   };
+
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
+
+  const navLinks = [
+    { label: "Features", action: () => handleSectionNavigation('features') },
+    { label: "Pricing", action: () => handleSectionNavigation('pricing') },
+    { label: "Extension", to: "/extension" },
+    { label: "Ambassadors", to: "/ambassadors" },
+    { label: "About", action: () => handleSectionNavigation('about') },
+  ];
   
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-6 pt-6">

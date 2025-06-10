@@ -2,10 +2,6 @@
 
 An AI-powered study planning tool that helps students optimize their academic journey through smart scheduling, task management, and progress tracking.
 
-## About
-
-PulsePlan is an intelligent study planning platform that leverages AI to help students create personalized study schedules, manage assignments, and track their academic progress. Built with a focus on user experience and modern design principles.
-
 ## Tech Stack
 
 - React + TypeScript
