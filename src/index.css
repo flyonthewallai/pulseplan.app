@@ -349,4 +349,22 @@
   .p-safe {
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
+
+  /* Viewport height utilities for mobile keyboard handling */
+  .h-screen-dynamic {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  .min-h-screen-dynamic {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  /* Mobile keyboard avoidance */
+  @supports (height: 100dvh) {
+    .mobile-menu-height {
+      height: 100dvh;
+    }
+  }
 }
