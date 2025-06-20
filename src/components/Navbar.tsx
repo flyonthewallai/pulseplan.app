@@ -267,7 +267,7 @@ const Navbar = () => {
                   </ul>
                 </nav>
 
-                <div className="space-y-4 pb-8">
+                <div className="space-y-4 pb-8 pb-safe">
                   {!loading && (
                     user ? (
                       <Button 
