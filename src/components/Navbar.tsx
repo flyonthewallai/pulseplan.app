@@ -104,7 +104,7 @@ const Navbar = () => {
   ];
   
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 pt-6">
+    <header className="fixed top-0 left-0 right-0 z-50 px-6">
       <motion.nav
         initial="hidden"
         animate="visible"

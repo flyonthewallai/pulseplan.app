@@ -43,7 +43,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-8">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-10 md:pt-8">
       <Container className="relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           <div className="flex-1 text-center lg:text-left">
