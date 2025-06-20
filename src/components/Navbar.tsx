@@ -229,92 +229,90 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg md:hidden flex flex-col mobile-menu-height"
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg md:hidden flex flex-col"
             style={{ height: `${viewportHeight}px` }}
           >
-            <Container>
-              <div className="flex items-center justify-between h-16 mt-6">
-                <Link 
-                  to="/" 
-                  className="flex items-center space-x-2 group"
-                  onClick={handleLinkClick}
+            {/* Header with logo and close button */}
+            <div className="flex items-center justify-between p-6">
+              <Link 
+                to="/" 
+                className="flex items-center space-x-2 group"
+                onClick={handleLinkClick}
+              >
+                <img src={pulseLogo} alt="PulsePlan" className="w-8 h-8" />
+                <span className="text-2xl font-bold">
+                  PulsePlan
+                </span>
+              </Link>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 text-foreground rounded-lg"
+                aria-label="Close mobile menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Main content area */}
+            <div className="flex-1 flex flex-col justify-between px-6 pb-6">
+              {/* Navigation links */}
+              <nav className="mt-12">
+                <ul className="space-y-6">
+                  {navLinks.map((link) => (
+                    <li key={link.label}>
+                      {link.to ? (
+                         <Link 
+                          to={link.to} 
+                          className="block text-4xl font-semibold text-foreground/80 hover:text-foreground transition-colors"
+                          onClick={handleLinkClick}
+                        >
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <button 
+                          onClick={() => link.action && link.action()}
+                          className="block text-4xl font-semibold text-foreground/80 hover:text-foreground transition-colors text-left w-full"
+                        >
+                          {link.label}
+                        </button>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              {/* Bottom buttons */}
+              <div className="space-y-4 mt-auto">
+                {!loading && (
+                  user ? (
+                    <Button 
+                      variant="outline" 
+                      size="lg" 
+                      className="w-full text-lg font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 py-4"
+                      onClick={handleSignOut}
+                    >
+                      <User className="w-4 h-4 mr-2" />
+                      Account
+                    </Button>
+                  ) : (
+                    <Button 
+                      asChild
+                      variant="outline" 
+                      size="lg" 
+                      className="w-full text-lg font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 py-4"
+                    >
+                      <Link to="/auth">Log In</Link>
+                    </Button>
+                  )
+                )}
+                <Button 
+                  size="lg" 
+                  className="w-full bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg font-medium shadow-lg py-4"
                 >
-                  <img src={pulseLogo} alt="PulsePlan" className="w-8 h-8" />
-                  <span className="text-2xl font-bold">
-                    PulsePlan
-                  </span>
-                </Link>
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 text-foreground rounded-lg"
-                  aria-label="Close mobile menu"
-                >
-                  <X className="w-6 h-6" />
-                </button>
+                  <AppleLogo className="w-5 h-5 mr-2" />
+                  Get the App
+                </Button>
               </div>
-            </Container>
-
-            <div className="flex-1 flex flex-col justify-between overflow-hidden pb-4">
-              <Container>
-                <nav className="mt-8 flex-shrink-0">
-                  <ul className="space-y-3">
-                    {navLinks.map((link) => (
-                      <li key={link.label}>
-                        {link.to ? (
-                           <Link 
-                            to={link.to} 
-                            className="block text-3xl font-semibold text-foreground/80 hover:text-foreground transition-colors"
-                            onClick={handleLinkClick}
-                          >
-                            {link.label}
-                          </Link>
-                        ) : (
-                          <button 
-                            onClick={() => link.action && link.action()}
-                            className="block text-3xl font-semibold text-foreground/80 hover:text-foreground transition-colors"
-                          >
-                            {link.label}
-                          </button>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </Container>
-
-              <Container className="flex-shrink-0">
-                <div className="space-y-3 pb-4">
-                  {!loading && (
-                    user ? (
-                      <Button 
-                        variant="outline" 
-                        size="lg" 
-                        className="w-full text-base font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 py-3"
-                        onClick={handleSignOut}
-                      >
-                        <User className="w-4 h-4 mr-2" />
-                        Account
-                      </Button>
-                    ) : (
-                      <Button 
-                        asChild
-                        variant="outline" 
-                        size="lg" 
-                        className="w-full text-base font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 py-3"
-                      >
-                        <Link to="/auth">Log In</Link>
-                      </Button>
-                    )
-                  )}
-                  <Button 
-                    size="lg" 
-                    className="w-full bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-base font-medium shadow-lg py-3"
-                  >
-                    <AppleLogo className="w-5 h-5 mr-2" />
-                    Get the App
-                  </Button>
-                </div>
-              </Container>
             </div>
 
           </motion.div>

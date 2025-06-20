@@ -14,28 +14,28 @@ const AuthCallback = () => {
       // The session is automatically handled by the Supabase client library.
       // We just need to wait for it to be set and then redirect.
       const { data: { session }, error } = await supabase.auth.getSession();
-
-      if (error) {
+        
+        if (error) {
         toast.error(error.message || 'Authentication failed. Please try again.');
         navigate('/auth', { replace: true });
-        return;
-      }
+          return;
+        }
 
       if (session) {
         toast.success('Successfully logged in!');
-        
+          
         // This message can be picked up by a content script in a browser extension
-        window.postMessage({
-          type: 'PULSEPLAN_AUTH_SUCCESS',
+          window.postMessage({
+            type: 'PULSEPLAN_AUTH_SUCCESS',
           payload: {
             accessToken: session.access_token,
             refreshToken: session.refresh_token,
             user: session.user,
           }
         }, window.location.origin);
-
+          
         // Redirect to a protected route or dashboard
-        navigate('/', { replace: true });
+            navigate('/', { replace: true });
       }
       // If there's no session and no error, the listener will handle it.
     };
