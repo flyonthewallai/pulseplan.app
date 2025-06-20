@@ -140,8 +140,8 @@ export default {
 				}
 			},
 			animation: {
-				'accordion-down': 'accordion-down 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-				'accordion-up': 'accordion-up 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+				'accordion-down': 'accordion-down 0.3s ease-in-out',
+				'accordion-up': 'accordion-up 0.3s ease-in-out',
 				'float': 'float 8s cubic-bezier(0.4, 0, 0.2, 1) infinite',
 				'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.2, 1) infinite',
 				'wave-1': 'wave 2s ease-in-out infinite',

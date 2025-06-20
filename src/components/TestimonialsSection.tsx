@@ -41,7 +41,7 @@ const TestimonialsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold">Loved by students everywhere</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">Loved by students everywhere</h2>
           <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
             See real user stories.
           </p>

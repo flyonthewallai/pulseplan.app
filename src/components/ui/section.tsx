@@ -4,11 +4,12 @@ import { ReactNode } from "react";
 interface SectionProps {
   children: ReactNode;
   className?: string;
+  id?: string;
 }
 
-export const Section = ({ children, className }: SectionProps) => {
+export const Section = ({ children, className, id }: SectionProps) => {
   return (
-    <section className={cn("py-24 relative", className)}>
+    <section id={id} className={cn("py-24 relative", className)}>
       {children}
     </section>
   );

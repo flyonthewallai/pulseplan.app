@@ -39,7 +39,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <Section className="relative bg-secondary/20 backdrop-blur-sm">
+    <Section className="relative backdrop-blur-sm">
       <Container>
         <motion.div
           initial="hidden"
@@ -48,7 +48,7 @@ const FeaturesSection = () => {
           viewport={viewportConfig}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold">Powerful Features</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">Powerful Features</h2>
           <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
             Everything you need to excel academically, powered by cutting-edge AI technology.
           </p>

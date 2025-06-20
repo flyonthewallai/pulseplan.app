@@ -299,28 +299,15 @@ const Extension = () => {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                whileHover={{ y: -5 }}
-                style={{ willChange: 'transform' }}
                 className="text-center"
               >
-                <div className="relative mb-8">
-                  <motion.div 
-                    className="w-20 h-20 mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center relative"
-                    whileHover={{ scale: 1.1 }}
-                    transition={transitions.bouncy}
-                  >
-                    <step.icon className="w-8 h-8 text-white" />
-                    <motion.div
-                      className="absolute -inset-1 bg-gradient-to-r from-cyan-500/50 to-blue-500/50 rounded-full blur-md"
-                      animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
-                    />
-                  </motion.div>
-                  
-
+                <div className="relative inline-block mb-6">
+                  <div className="w-20 h-20 mx-auto flex items-center justify-center bg-gray-900/80 border border-gray-700/60 rounded-full shadow-lg">
+                    <step.icon className="w-10 h-10 text-cyan-400" />
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold mb-3 text-white">{step.title}</h3>
-                <p className="text-gray-300 text-sm">{step.description}</p>
+                <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                <p className="text-gray-400">{step.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -355,7 +342,7 @@ const Extension = () => {
               >
                 <a href="#" target="_blank" rel="noopener noreferrer">
                   <Chrome className="mr-3 w-5 h-5 md:w-6 md:h-6" />
-                  Chrome Web Store Button (Install Extension)
+                  Chrome Web Store
                 </a>
               </Button>
             </motion.div>

@@ -58,7 +58,7 @@ const ExtensionSection = () => {
           viewport={viewportConfig}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Canvas Extension</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Canvas Extension</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Connect your Canvas LMS with PulsePlan for seamless assignment syncing. 
             No more manual entry—just install and go.
@@ -170,7 +170,7 @@ const ExtensionSection = () => {
                   variant="outline"
                   className="text-lg px-8 py-4 rounded-xl bg-black hover:bg-black/90 text-white border border-white/20 hover:border-white/60 transition-all duration-200"
                 >
-                  <Link to="/extension">
+                  <Link to="/extension#">
                     Learn More
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Link>

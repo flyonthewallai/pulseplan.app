@@ -57,7 +57,7 @@ const FAQSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">Frequently Asked Questions</h2>
           <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
             Everything you need to know about PulsePlan
           </p>

@@ -27,24 +27,12 @@ const isSupabaseConfigured = () => {
 
 // Auth helper functions
 export const authHelpers = {
-  signInWithGoogle: () => {
+  signInWithProvider: (provider: 'google' | 'apple') => {
     if (!isSupabaseConfigured()) {
       return Promise.resolve({ error: { message: 'Supabase is not configured properly' } })
     }
     return supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`
-      }
-    })
-  },
-
-  signInWithApple: () => {
-    if (!isSupabaseConfigured()) {
-      return Promise.resolve({ error: { message: 'Supabase is not configured properly' } })
-    }
-    return supabase.auth.signInWithOAuth({
-      provider: 'apple',
+      provider,
       options: {
         redirectTo: `${window.location.origin}/auth/callback`
       }

@@ -4,7 +4,9 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp } from "@/lib/animation-configs";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import pulseLogo from "/assets/pulselogo.png";
 
 const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
   <svg 
@@ -20,10 +22,35 @@ const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
   
+  // Check authentication status
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      setLoading(false);
+    };
+
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -74,7 +101,6 @@ const Navbar = () => {
     { label: "Pricing", action: () => handleSectionNavigation('pricing') },
     { label: "Extension", to: "/extension" },
     { label: "Ambassadors", to: "/ambassadors" },
-    { label: "About", action: () => handleSectionNavigation('about') },
   ];
   
   return (
@@ -96,7 +122,8 @@ const Navbar = () => {
               className="flex items-center space-x-2 group"
               onClick={() => window.scrollTo(0, 0)}
             >
-              <span className="text-2xl font-bold transition-colors group-hover:text-rhythm-blue">
+              <img src={pulseLogo} alt="PulsePlan" className="w-8 h-8" />
+              <span className="text-2xl font-bold transition-colors">
                 PulsePlan
               </span>
             </Link>
@@ -115,7 +142,7 @@ const Navbar = () => {
                 Pricing
               </button>
               <Link 
-                to="/extension" 
+                to="/extension#" 
                 className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
                 onClick={() => window.scrollTo(0, 0)}
               >
@@ -128,24 +155,33 @@ const Navbar = () => {
               >
                 Ambassadors
               </Link>
-              <button 
-                onClick={() => handleSectionNavigation('about')}
-                className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
-              >
-                About
-              </button>
             </nav>
             
             <div className="flex items-center gap-3">
               {/* Desktop buttons */}
               <div className="hidden md:flex items-center gap-3">
-                <Button 
-                  variant="outline" 
-                  size="default" 
-                  className="text-base font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 px-5 transition-all duration-200"
-                >
-                  Log In
-                </Button>
+                {!loading && (
+                  user ? (
+                    <Button 
+                      variant="outline" 
+                      size="default" 
+                      className="text-base font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 px-5 transition-all duration-200"
+                      onClick={handleSignOut}
+                    >
+                      <User className="w-4 h-4 mr-2" />
+                      Account
+                    </Button>
+                  ) : (
+                    <Button 
+                      asChild
+                      variant="outline" 
+                      size="default" 
+                      className="text-base font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 px-5 transition-all duration-200"
+                    >
+                      <Link to="/auth">Log In</Link>
+                    </Button>
+                  )
+                )}
                 <Button 
                   size="default" 
                   className="bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200 px-6"
@@ -178,102 +214,96 @@ const Navbar = () => {
         </Container>
       </motion.nav>
 
-      {/* Optimized Mobile Menu Overlay */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className="fixed inset-0 z-40 md:hidden"
-            onClick={() => setIsMobileMenuOpen(false)}
-            style={{ willChange: 'opacity' }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg md:hidden"
           >
-            <div className="absolute inset-0 bg-black/100" />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ 
-                type: 'spring', 
-                damping: 30, 
-                stiffness: 300,
-                duration: 0.2
-              }}
-              className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-background/98 border-l border-white/20 shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-              style={{ willChange: 'transform' }}
-            >
-              <div className="flex flex-col h-full">
-                {/* Mobile menu header */}
-                <div className="flex items-center justify-between p-6 border-b border-white/10">
-                  <span className="text-xl font-bold">Menu</span>
-                  <button
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
+            <Container>
+              <div className="flex items-center justify-between h-16 mt-6">
+                <Link 
+                  to="/" 
+                  className="flex items-center space-x-2 group"
+                  onClick={handleLinkClick}
+                >
+                  <img src={pulseLogo} alt="PulsePlan" className="w-8 h-8" />
+                  <span className="text-2xl font-bold">
+                    PulsePlan
+                  </span>
+                </Link>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-foreground rounded-lg"
+                  aria-label="Close mobile menu"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
 
-                {/* Mobile navigation links - Optimized */}
-                <nav className="flex-1 px-6 py-6 space-y-2">
-                  <button 
-                    onClick={() => handleSectionNavigation('features')}
-                    className="block w-full text-left px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
-                  >
-                    Features
-                  </button>
-                  <button 
-                    onClick={() => handleSectionNavigation('pricing')}
-                    className="block w-full text-left px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
-                  >
-                    Pricing
-                  </button>
-                  <Link 
-                    to="/extension" 
-                    className="block px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
-                    onClick={handleLinkClick}
-                  >
-                    Extension
-                  </Link>
-                  <Link 
-                    to="/ambassadors" 
-                    className="block px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
-                    onClick={handleLinkClick}
-                  >
-                    Ambassadors
-                  </Link>
-                  <button 
-                    onClick={() => handleSectionNavigation('about')}
-                    className="block w-full text-left px-4 py-3 text-lg font-medium text-foreground hover:bg-white/8 rounded-lg transition-colors duration-150"
-                  >
-                    About
-                  </button>
+              <div className="flex flex-col justify-between" style={{ height: 'calc(100vh - 100px)'}}>
+                <nav className="mt-12">
+                  <ul className="space-y-4">
+                    {navLinks.map((link) => (
+                      <li key={link.label}>
+                        {link.to ? (
+                           <Link 
+                            to={link.to} 
+                            className="block text-4xl font-semibold text-foreground/80 hover:text-foreground transition-colors"
+                            onClick={handleLinkClick}
+                          >
+                            {link.label}
+                          </Link>
+                        ) : (
+                          <button 
+                            onClick={() => link.action && link.action()}
+                            className="block text-4xl font-semibold text-foreground/80 hover:text-foreground transition-colors"
+                          >
+                            {link.label}
+                          </button>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
                 </nav>
 
-                {/* Mobile menu buttons - Optimized */}
-                <div className="p-6 space-y-3 border-t border-white/10">
+                <div className="space-y-4 pb-8">
+                  {!loading && (
+                    user ? (
+                      <Button 
+                        variant="outline" 
+                        size="lg" 
+                        className="w-full text-lg font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 py-4"
+                        onClick={handleSignOut}
+                      >
+                        <User className="w-4 h-4 mr-2" />
+                        Account
+                      </Button>
+                    ) : (
+                      <Button 
+                        asChild
+                        variant="outline" 
+                        size="lg" 
+                        className="w-full text-lg font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 py-4"
+                      >
+                        <Link to="/auth">Log In</Link>
+                      </Button>
+                    )
+                  )}
                   <Button 
-                    variant="outline" 
-                    size="default" 
-                    className="w-full text-lg font-medium hover:bg-white/8 border border-white/20 hover:border-white/40 py-3 transition-colors duration-150"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    size="lg" 
+                    className="w-full bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg font-medium shadow-lg py-4"
                   >
-                    Log In
-                  </Button>
-                  <Button 
-                    size="default" 
-                    className="w-full bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg font-medium shadow-lg py-3 transition-colors duration-150"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <AppleLogo className="w-5 h-5" />
+                    <AppleLogo className="w-5 h-5 mr-2" />
                     Get the App
                   </Button>
                 </div>
               </div>
-            </motion.div>
+
+            </Container>
           </motion.div>
         )}
       </AnimatePresence>

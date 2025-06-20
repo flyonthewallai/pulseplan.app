@@ -44,7 +44,7 @@ export const CTASection = () => {
           
           <motion.h2
             variants={fadeInUp}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight will-change-transform"
+            className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight will-change-transform"
           >
             Plan less. <span className="text-gradient-blue">Do more.</span>
           </motion.h2>

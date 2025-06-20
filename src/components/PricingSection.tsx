@@ -58,7 +58,7 @@ const PricingSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold">Simple pricing</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">Simple pricing</h2>
           <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
             Start free and upgrade when you're ready for more powerful features.
           </p>

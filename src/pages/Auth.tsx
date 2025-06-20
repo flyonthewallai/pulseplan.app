@@ -57,10 +57,10 @@ const Auth = () => {
       let result;
       switch (provider) {
         case 'google':
-          result = await authHelpers.signInWithGoogle();
+          result = await authHelpers.signInWithProvider('google');
           break;
         case 'apple':
-          result = await authHelpers.signInWithApple();
+          result = await authHelpers.signInWithProvider('apple');
           break;
       }
 

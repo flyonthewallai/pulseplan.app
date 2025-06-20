@@ -334,26 +334,15 @@ const Ambassador = () => {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                whileHover={{ y: -5 }}
-                style={{ willChange: 'transform' }}
                 className="text-center"
               >
-                <div className="relative mb-8">
-                  <motion.div 
-                    className="w-20 h-20 mx-auto bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center relative"
-                    whileHover={{ scale: 1.1 }}
-                    transition={transitions.bouncy}
-                  >
-                    <step.icon className="w-8 h-8 text-white" />
-                    <motion.div
-                      className="absolute -inset-1 bg-gradient-to-r from-blue-500/50 to-purple-500/50 rounded-full blur-md"
-                      animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
-                    />
-                  </motion.div>
+                <div className="relative inline-block mb-6">
+                  <div className="w-20 h-20 mx-auto flex items-center justify-center bg-gray-900/80 border border-gray-700/60 rounded-full shadow-lg">
+                    <step.icon className="w-10 h-10 text-blue-400" />
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-white">{step.title}</h3>
-                <p className="text-gray-300">{step.description}</p>
+                <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                <p className="text-gray-400">{step.description}</p>
               </motion.div>
             ))}
           </motion.div>

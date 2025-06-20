@@ -46,11 +46,19 @@ const Footer = () => {
       ]
     },
     {
+        title: "Resources",
+        links: [
+          { name: "Docs", href: "#" },
+          { name: "Blog", href: "#" },
+          { name: "Changelog", href: "#" },
+        ]
+    },
+    {
       title: "Company",
       links: [
-        { name: "About Us", sectionId: "about" },
+        { name: "Fly on the Wall", href: "https://flyonthewalldev.com", isExternal: true },
         { name: "Contact", href: "https://flyonthewalldev.com/#contact", isExternal: true },
-        { name: "Blog", href: "#" },
+
       ]
     },
     {
@@ -58,86 +66,86 @@ const Footer = () => {
       links: [
         { name: "Terms", href: "/terms", isRouterLink: true, scrollToTop: true },
         { name: "Privacy", href: "#" },
+        { name: "Security", href: "#" },
       ]
     }
   ];
 
   return (
-    <footer className="py-8 border-t border-border">
+    <footer className="py-12 border-t border-white/10">
       <Container>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-          <div className="col-span-2 md:col-span-1">
-            <div>
-              <Link 
-                to="/" 
-                className="inline-block"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <h3 className="text-2xl font-bold text-gradient-lavender mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div className="md:col-span-3">
+              <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                   PulsePlan
                 </h3>
               </Link>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                AI-powered academic planning that adapts to your rhythm.
-              </p>
-              <div className="flex gap-2 mt-4">
-                <a href="https://github.com/flyonthewalldev" target="_blank" rel="noopener noreferrer" aria-label="Fly on the Wall GitHub">
+              <a 
+                href="mailto:hello@pulseplan.app" 
+                className="relative inline-block text-lg text-muted-foreground after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-px after:bg-muted-foreground after:w-0 after:transition-[width] after:duration-300 after:ease-in-out hover:after:w-full"
+              >
+                hello@pulseplan.app
+              </a>
+              <div className="flex gap-4 mt-4">
+                <a href="https://github.com/flyonthewalldev" target="_blank" rel="noopener noreferrer" aria-label="PulsePlan GitHub">
                   <Github className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
                 </a>
                 <a href="https://flyonthewalldev.com" target="_blank" rel="noopener noreferrer" aria-label="Fly on the Wall Website">
                   <Globe className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
                 </a>
               </div>
-            </div>
           </div>
 
-          {footerLinks.map((group, index) => (
-            <div key={index}>
-              <h4 className="font-semibold mb-4">{group.title}</h4>
-              <ul className="space-y-2">
-                {group.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
-                    {link.sectionId ? (
-                      <button
-                        onClick={() => handleSectionNavigation(link.sectionId)}
-                        className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
-                      >
-                        {link.name}
-                      </button>
-                    ) : link.isRouterLink ? (
-                      <Link 
-                        to={link.href} 
-                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                        onClick={link.scrollToTop ? () => window.scrollTo(0, 0) : undefined}
-                      >
-                        {link.name}
-                      </Link>
-                    ) : link.isExternal ? (
-                      <a 
-                        href={link.href} 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                      >
-                        {link.name}
-                      </a>
-                    ) : (
-                      <a 
-                        href={link.href} 
-                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                      >
-                        {link.name}
-                      </a>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="md:col-span-9 grid grid-cols-2 md:grid-cols-4 gap-8">
+            {footerLinks.map((group) => (
+              <div key={group.title}>
+                <h4 className="font-semibold mb-4 text-foreground">{group.title}</h4>
+                <ul className="space-y-3">
+                  {group.links.map((link) => (
+                    <li key={link.name}>
+                      {link.sectionId ? (
+                        <button
+                          onClick={() => handleSectionNavigation(link.sectionId)}
+                          className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
+                        >
+                          {link.name}
+                        </button>
+                      ) : link.isRouterLink ? (
+                        <Link 
+                          to={link.href || '#'} 
+                          className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                          onClick={link.scrollToTop ? () => window.scrollTo(0, 0) : undefined}
+                        >
+                          {link.name}
+                        </Link>
+                      ) : link.isExternal ? (
+                        <a 
+                          href={link.href} 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                        >
+                          {link.name}
+                        </a>
+                      ) : (
+                        <a 
+                          href={link.href} 
+                          className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                        >
+                          {link.name}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© {currentYear} PulsePlan. Built with ❤️ by Fly on the Wall.</p>
+        <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-muted-foreground">
+          <p>© {currentYear} PulsePlan. Built by <a href="https://flyonthewalldev.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Fly on the Wall</a>.</p>
         </div>
       </Container>
     </footer>

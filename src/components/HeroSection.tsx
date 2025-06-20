@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Container } from "@/components/ui/container";
-import { IPhoneMockup } from "@/components/ui/iphone-mockup";
 import { GlowingOrb } from "@/components/ui/glowing-orb";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { 
   fadeInUp, 
   fadeInScale, 
@@ -26,11 +26,24 @@ const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
   </svg>
 );
 
-
+const demoImages = [
+  "/assets/demo1.png",
+  "/assets/demo2.png",
+  "/assets/demo3.png"
+];
 
 const HeroSection = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % demoImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-8">
       <Container className="relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           <div className="flex-1 text-center lg:text-left">
@@ -118,15 +131,23 @@ const HeroSection = () => {
             </motion.div>
           </div>
           
-          <div className="flex-1 w-full max-w-md mx-auto lg:mx-0">
-            <motion.div
-              variants={fadeInScale}
-              initial="hidden"
-              animate="visible"
-              className="will-change-transform"
-            >
-              <IPhoneMockup />
-            </motion.div>
+          <div className="flex-1 w-full max-w-md mx-auto lg:mx-0 relative h-[650px]">
+            <AnimatePresence>
+              {demoImages.map((image, index) => 
+                index === currentImage && (
+                  <motion.img
+                    key={image}
+                    src={image}
+                    alt={`demo${index + 1}`}
+                    initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -50, scale: 0.95 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full object-contain will-change-transform"
+                  />
+                )
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </Container>
