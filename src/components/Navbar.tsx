@@ -104,11 +104,8 @@ const Navbar = () => {
   ];
   
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6">
-      <motion.nav
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 pt-6">
+      <nav
         className={`mx-auto max-w-6xl transition-all duration-300 rounded-2xl will-change-transform ${
           scrolled 
             ? 'bg-background/85 backdrop-blur-xl shadow-xl border border-white/20' 
@@ -212,7 +209,7 @@ const Navbar = () => {
             </div>
           </div>
         </Container>
-      </motion.nav>
+      </nav>
 
       <AnimatePresence>
         {isMobileMenuOpen && (
