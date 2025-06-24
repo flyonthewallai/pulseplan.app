@@ -26,10 +26,13 @@ const AppleLogo = ({ className = "w-5 h-5" }: { className?: string }) => (
   </svg>
 );
 
+// Cache-busting timestamp for demo images
+const CACHE_BUST = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');
+
 const demoImages = [
-  "/assets/demo1.png",
-  "/assets/demo2.png",
-  "/assets/demo3.png"
+  `/assets/demo1.png?v=${CACHE_BUST}`,
+  `/assets/demo2.png?v=${CACHE_BUST}`,
+  `/assets/demo3.png?v=${CACHE_BUST}`
 ];
 
 const HeroSection = () => {
