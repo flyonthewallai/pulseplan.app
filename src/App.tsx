@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Ambassadors from "./pages/Ambassadors";
-import Extension from "./pages/Extension";
 import TermsOfService from "./pages/TermsOfService";
 import Auth from "./pages/Auth";
 import AuthCallback from "./pages/AuthCallback";
@@ -22,7 +21,6 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/ambassadors" element={<Ambassadors />} />
-          <Route path="/extension" element={<Extension />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/auth/callback" element={<AuthCallback />} />

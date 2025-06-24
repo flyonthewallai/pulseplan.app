@@ -1,5 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Brain, Shield, Calendar, Download, Lock, RefreshCw, HelpCircle, ChevronDown } from "lucide-react";
+import { Brain, Shield, Calendar, Lock, RefreshCw, HelpCircle, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
@@ -19,11 +19,6 @@ const faqs = [
     question: "Can I adjust the schedule manually?",
     answer: "Absolutely! You have full control over your schedule. You can drag and drop tasks, adjust time blocks, add breaks, or completely reschedule items. The AI learns from your manual adjustments to better understand your preferences.",
     icon: Calendar
-  },
-  {
-    question: "How does Canvas integration work?",
-    answer: "Our Chrome extension securely connects to your Canvas account and automatically imports your assignments, due dates, and course information. This data is then used by our AI to create realistic study schedules around your coursework.",
-    icon: Download
   },
   {
     question: "Is my data secure and private?",

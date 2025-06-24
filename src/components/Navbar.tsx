@@ -110,7 +110,6 @@ const Navbar = () => {
   const navLinks = [
     { label: "Features", action: () => handleSectionNavigation('features') },
     { label: "Pricing", action: () => handleSectionNavigation('pricing') },
-    { label: "Extension", to: "/extension" },
     { label: "Ambassadors", to: "/ambassadors" },
   ];
   
@@ -149,13 +148,6 @@ const Navbar = () => {
               >
                 Pricing
               </button>
-              <Link 
-                to="/extension#" 
-                className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                Extension
-              </Link>
               <Link 
                 to="/ambassadors" 
                 className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"

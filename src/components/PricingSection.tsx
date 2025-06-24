@@ -27,8 +27,8 @@ const PricingSection = () => {
       description: "For serious students",
       features: [
         "Full-month planning",
-        "Recurring task automation",
-        "Priority AI chat support"
+        "Automatic Task Rescheduling",
+        "Unlimited AI usage"
       ],
       cta: "Upgrade to Premium",
       popular: true,

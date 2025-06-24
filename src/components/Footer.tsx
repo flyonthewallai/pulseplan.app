@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Container } from "@/components/ui/container";
-import { Github, Globe } from "lucide-react";
+import { Github, Globe, Linkedin } from "lucide-react";
 import { useEffect } from "react";
 
 const Footer = () => {
@@ -41,7 +41,6 @@ const Footer = () => {
       links: [
         { name: "Features", sectionId: "features" },
         { name: "Pricing", sectionId: "pricing" },
-        { name: "Extension", href: "/extension", isRouterLink: true, scrollToTop: true },
         { name: "Ambassadors", href: "/ambassadors", isRouterLink: true, scrollToTop: true },
       ]
     },
@@ -90,6 +89,9 @@ const Footer = () => {
               <div className="flex gap-4 mt-4">
                 <a href="https://github.com/flyonthewalldev" target="_blank" rel="noopener noreferrer" aria-label="PulsePlan GitHub">
                   <Github className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
+                </a>
+                <a href="https://linkedin.com/company/flyonthewalldev" target="_blank" rel="noopener noreferrer" aria-label="Fly on the Wall LinkedIn">
+                  <Linkedin className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
                 </a>
                 <a href="https://flyonthewalldev.com" target="_blank" rel="noopener noreferrer" aria-label="Fly on the Wall Website">
                   <Globe className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />

@@ -7,7 +7,7 @@ import { ArrowUp } from "lucide-react";
 
 const integrations = [
   { name: "Google Calendar", logo: "/assets/googlecalendar.png" },
-  { name: "Outlook", logo: "/assets/outlook.webp" },
+  { name: "Canvas", logo: "/assets/canvas.png" },
   { name: "Gmail", logo: "/assets/gmail.png" },
   { name: "Apple Calendar", logo: "/assets/applecalendar.png" },
   { name: "Notion", logo: "/assets/notion.png" },
@@ -24,8 +24,8 @@ const aiPrompts = [
     prompt: "Email Ronan my chemistry notes"
   },
   {
-    icon: <img src="/assets/outlook.webp" alt="Outlook" className="w-10 h-10 object-contain" />,
-    prompt: "When is my next research meeting?"
+    icon: <img src="/assets/canvas.png" alt="Outlook" className="w-6 h-6 object-contain" />,
+    prompt: "Fetch this week's assignments"
   },
   {
     icon: <img src="/assets/googlecalendar.png" alt="Google Calendar" className="w-6 h-6" />,
@@ -36,7 +36,7 @@ const aiPrompts = [
     prompt: "Create a study plan for finals week"
   },
   {
-    icon: <img src="/assets/pulseplan.png" alt="PulsePlan" className="w-9 h-9" />,
+    icon: <img src="/assets/logo.png" alt="PulsePlan" className="w-9 h-9" />,
     prompt: "Make me a schedule for the next 2 weeks"
   },
 ];
