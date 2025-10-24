@@ -24,13 +24,13 @@ export const GlowingOrb = ({ className, size = 'md', color = 'blue' }: GlowingOr
   const glowColors = {
     lavender: 'rgba(155, 135, 245, 0.4)',
     coral: 'rgba(249, 115, 22, 0.4)',
-    blue: 'rgba(96, 165, 250, 0.4)',
+    blue: 'rgba(37, 99, 235, 0.4)',
   };
 
   const innerColors = {
     lavender: '#9b87f5',
     coral: '#F97316',
-    blue: '#60a5fa',
+    blue: '#2563eb',
   };
   
   return (

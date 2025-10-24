@@ -104,12 +104,12 @@ const NotFound = () => {
                   >
                     Features
                   </button>
-                  <button
-                    onClick={() => handleSectionNavigation('pricing')}
+                  <Link 
+                    to="/pricing" 
                     className="text-rhythm-blue hover:text-rhythm-blue/80 transition-colors text-sm"
                   >
                     Pricing
-                  </button>
+                  </Link>
                   <Link 
                     to="/ambassadors" 
                     className="text-rhythm-blue hover:text-rhythm-blue/80 transition-colors text-sm"

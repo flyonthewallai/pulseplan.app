@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Container } from "@/components/ui/container";
 import { GlowingOrb } from "@/components/ui/glowing-orb";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight, Play } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { 
@@ -48,8 +48,8 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-10 md:pt-8">
       <Container className="relative z-10">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-          <div className="flex-1 text-center lg:text-left">
+        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+          <div className="w-full">
             {/* Main content container with optimized staggered animation */}
             <motion.div
               initial="hidden"
@@ -60,7 +60,7 @@ const HeroSection = () => {
               {/* Floating Orb */}
               <motion.div
                 variants={fadeInUp}
-                className="flex justify-center lg:justify-start mb-8 mt-16 lg:mt-0"
+                className="flex justify-center mb-8 mt-16 lg:mt-0"
               >
                 <GlowingOrb size="lg" color="blue" />
               </motion.div>
@@ -70,24 +70,24 @@ const HeroSection = () => {
                 variants={fadeInUp}
                 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 will-change-transform"
               >
-                Let your schedule find its{" "}
-                <span className="text-gradient-blue">rhythm</span>.
+                Your personal AI {" "}
+                <span className="text-gradient-blue">academic agent</span>.
               </motion.h1>
               
               {/* Subtitle */}
               <motion.p
                 variants={fadeInUp}
-                className="text-xl text-muted-foreground max-w-xl mb-4"
+                className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8"
               >
-                Built to make you extraordinarily productive, PulsePlan is the best way to manage your academic life with AI.
+                PulsePlan turns assignments and calendars into an effortless schedule, making you more productive every day.
               </motion.p>
               
               {/* CTA Buttons */}
               <motion.div
                 variants={fadeInUp}
-                className="will-change-transform"
+                className="will-change-transform mb-12"
               >
-                <ButtonGroup className="justify-center lg:justify-start">
+                <ButtonGroup className="justify-center gap-4">
                   <motion.div
                     whileHover={hoverScale}
                     whileTap={tapScale}
@@ -95,23 +95,23 @@ const HeroSection = () => {
                   >
                     <Button 
                       size="lg" 
-                      className="bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg px-8 py-4 rounded-xl transition-colors duration-200"
+                      className="bg-white hover:bg-gray-100 text-black text-lg px-8 py-4 rounded-xl transition-colors duration-200"
                     >
                       <AppleLogo />Download the App
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
                   </motion.div>
                   <motion.div
+                    whileHover={hoverScale}
                     whileTap={tapScale}
                     className="will-change-transform"
                   >
                     <Button 
-                      variant="outline" 
                       size="lg" 
-                      className="text-lg px-8 py-4 rounded-xl bg-black hover:bg-black/90 text-white border border-white/20 hover:border-white/60 transition-all duration-200"
+                      variant="outline"
+                      className="bg-transparent hover:bg-white/10 text-white border-white/30 hover:border-white/60 text-lg px-8 py-4 rounded-xl transition-all duration-200"
                     >
-                      Upgrade to Premium
-                      <ChevronRight className="ml-2 w-5 h-5" />
+                      Try It Free
                     </Button>
                   </motion.div>
                 </ButtonGroup>
@@ -120,37 +120,18 @@ const HeroSection = () => {
               {/* Trust indicators */}
               <motion.div
                 variants={fadeInUp}
-                className="text-center lg:text-left mt-12"
+                className="text-center"
               >
                 <p className="text-sm text-muted-foreground mb-4">Trusted by students at</p>
-                <div className="flex flex-wrap justify-center lg:justify-start items-center gap-8 opacity-60">
-                  <span className="text-lg font-medium">CU Boulder</span>
-                  <span className="text-lg font-medium">LSU</span>
-                  <span className="text-lg font-medium">Nebraska</span>
-                  <span className="text-lg font-medium">GCU</span>
-                  <span className="text-lg font-medium">CSU</span>
+                <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+                  <span className="text-lg font-medium">Harvard</span>
+                  <span className="text-lg font-medium">MIT</span>
+                  <span className="text-lg font-medium">Princeton</span>
+                  <span className="text-lg font-medium">Oxford</span>
+                  <span className="text-lg font-medium">Yale</span>
                 </div>
               </motion.div>
             </motion.div>
-          </div>
-          
-          <div className="flex-1 w-full max-w-md mx-auto lg:mx-0 relative h-[650px]">
-            <AnimatePresence>
-              {demoImages.map((image, index) => 
-                index === currentImage && (
-                  <motion.img
-                    key={image}
-                    src={image}
-                    alt={`demo${index + 1}`}
-                    initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -50, scale: 0.95 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full object-contain will-change-transform"
-                  />
-                )
-              )}
-            </AnimatePresence>
           </div>
         </div>
       </Container>

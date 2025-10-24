@@ -5,6 +5,7 @@ import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { GlowingOrb } from '@/components/ui/glowing-orb';
 import { motion } from 'framer-motion';
+import { Play } from 'lucide-react';
 import { 
   fadeInUp, 
   staggerContainer, 
@@ -69,6 +70,15 @@ export const CTASection = () => {
               >
                 <Button size="lg" className="bg-rhythm-blue text-white hover:bg-rhythm-blue/90 text-xl px-10 py-5 rounded-2xl transition-colors duration-200">
                   <AppleLogo className="w-7 h-7 mr-3" />Download the App
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={hoverScale}
+                whileTap={tapScale}
+                className="will-change-transform"
+              >
+                <Button size="lg" variant="outline" className="text-xl px-10 py-5 rounded-2xl bg-transparent hover:bg-white/10 text-white border border-white/30 hover:border-white/60 transition-all duration-200">
+                  Try It Free
                 </Button>
               </motion.div>
               <motion.div

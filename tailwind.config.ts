@@ -67,12 +67,26 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				rhythm: {
-					blue: '#60a5fa',
+					blue: '#3b82f6',
 					lavender: '#9b87f5',
 					coral: '#F97316',
 					'soft-lavender': '#E5DEFF',
 					'soft-coral': '#FDE1D3',
-				}
+				},
+				// Custom scrollytelling colors
+				highlight: {
+					DEFAULT: 'hsl(var(--highlight))',
+					foreground: 'hsl(var(--highlight-foreground))'
+				},
+				inactive: 'hsl(var(--inactive))',
+				'phone-bg': 'hsl(var(--phone-bg))',
+				'phone-border': 'hsl(var(--phone-border))',
+				'message-bg': 'hsl(var(--message-bg))',
+				'message-text': 'hsl(var(--message-text))'
+			},
+			backgroundImage: {
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-bg': 'var(--gradient-bg)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Container } from "@/components/ui/container";
-import { Github, Globe, Linkedin } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 import { useEffect } from "react";
 
 const Footer = () => {
@@ -40,7 +40,7 @@ const Footer = () => {
       title: "Product",
       links: [
         { name: "Features", sectionId: "features" },
-        { name: "Pricing", sectionId: "pricing" },
+        { name: "Pricing", href: "/pricing", isRouterLink: true, scrollToTop: true },
         { name: "Ambassadors", href: "/ambassadors", isRouterLink: true, scrollToTop: true },
       ]
     },
@@ -71,52 +71,46 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="py-12 border-t border-white/10">
+    <footer className="py-16">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div className="md:col-span-3">
-              <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-                <h3 className="text-2xl font-bold text-foreground mb-4">
-                  PulsePlan
-                </h3>
-              </Link>
-              <a 
-                href="mailto:hello@pulseplan.app" 
-                className="relative inline-block text-lg text-muted-foreground after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-px after:bg-muted-foreground after:w-0 after:transition-[width] after:duration-300 after:ease-in-out hover:after:w-full"
-              >
-                hello@pulseplan.app
-              </a>
-              <div className="flex gap-4 mt-4">
-                <a href="https://github.com/flyonthewalldev" target="_blank" rel="noopener noreferrer" aria-label="PulsePlan GitHub">
-                  <Github className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-                </a>
-                <a href="https://linkedin.com/company/flyonthewalldev" target="_blank" rel="noopener noreferrer" aria-label="Fly on the Wall LinkedIn">
-                  <Linkedin className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-                </a>
-                <a href="https://flyonthewalldev.com" target="_blank" rel="noopener noreferrer" aria-label="Fly on the Wall Website">
-                  <Globe className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-                </a>
-              </div>
+        {/* Main Footer Content */}
+        <div className="flex flex-col lg:flex-row justify-between items-start mb-12">
+          {/* Left Section - Logo and Contact */}
+          <div className="mb-8 lg:mb-0 lg:w-1/3">
+            <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+              <h3 className="text-3xl font-bold text-foreground mb-6">
+                PulsePlan
+              </h3>
+            </Link>
+            <a 
+              href="mailto:hello@pulseplan.app" 
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              hello@pulseplan.app
+            </a>
           </div>
 
-          <div className="md:col-span-9 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {/* Center-Right Section - Navigation Links */}
+          <div className="grid grid-cols-4 gap-8 lg:gap-12 lg:w-2/3">
             {footerLinks.map((group) => (
               <div key={group.title}>
-                <h4 className="font-semibold mb-4 text-foreground">{group.title}</h4>
+                <h4 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">
+                  {group.title}
+                </h4>
                 <ul className="space-y-3">
                   {group.links.map((link) => (
                     <li key={link.name}>
                       {link.sectionId ? (
                         <button
                           onClick={() => handleSectionNavigation(link.sectionId)}
-                          className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                         >
                           {link.name}
                         </button>
                       ) : link.isRouterLink ? (
                         <Link 
                           to={link.href || '#'} 
-                          className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                           onClick={link.scrollToTop ? () => window.scrollTo(0, 0) : undefined}
                         >
                           {link.name}
@@ -126,14 +120,14 @@ const Footer = () => {
                           href={link.href} 
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                         >
                           {link.name}
                         </a>
                       ) : (
                         <a 
                           href={link.href} 
-                          className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                         >
                           {link.name}
                         </a>
@@ -146,8 +140,26 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-muted-foreground">
-          <p>© {currentYear} PulsePlan. Built by <a href="https://flyonthewalldev.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Fly on the Wall</a>.</p>
+        {/* Bottom Section - Social Icons and Copyright */}
+        <div className="flex flex-col lg:flex-row justify-between items-center pt-8 border-t border-white/10">
+          {/* Social Icons - Bottom Right */}
+          <div className="flex gap-4 mb-4 lg:mb-0">
+            <a href="https://github.com/flyonthewalldev" target="_blank" rel="noopener noreferrer" aria-label="PulsePlan GitHub">
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
+                <Github className="w-5 h-5 text-black" />
+              </div>
+            </a>
+            <a href="https://linkedin.com/company/flyonthewalldev" target="_blank" rel="noopener noreferrer" aria-label="Fly on the Wall LinkedIn">
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
+                <Linkedin className="w-5 h-5 text-black" />
+              </div>
+            </a>
+          </div>
+
+          {/* Copyright - Bottom Center */}
+          <div className="text-center text-sm text-muted-foreground">
+            <p>© {currentYear} PulsePlan. Built by <a href="https://flyonthewalldev.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Fly on the Wall</a>.</p>
+          </div>
         </div>
       </Container>
     </footer>

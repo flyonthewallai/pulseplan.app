@@ -109,7 +109,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Features", action: () => handleSectionNavigation('features') },
-    { label: "Pricing", action: () => handleSectionNavigation('pricing') },
+    { label: "Pricing", to: "/pricing" },
     { label: "Ambassadors", to: "/ambassadors" },
   ];
   
@@ -142,12 +142,13 @@ const Navbar = () => {
               >
                 Features
               </button>
-              <button 
-                onClick={() => handleSectionNavigation('pricing')}
+              <Link 
+                to="/pricing" 
                 className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 Pricing
-              </button>
+              </Link>
               <Link 
                 to="/ambassadors" 
                 className="px-5 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-white/8 rounded-lg transition-all duration-200"
@@ -184,7 +185,7 @@ const Navbar = () => {
                 )}
                 <Button 
                   size="default" 
-                  className="bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200 px-6"
+                  className="bg-white hover:bg-white/90 text-black text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200 px-6"
                 >
                   <AppleLogo className="w-5 h-5" />
                   Get the App
@@ -299,7 +300,7 @@ const Navbar = () => {
                 )}
                 <Button 
                   size="lg" 
-                  className="w-full bg-rhythm-blue hover:bg-rhythm-blue/90 text-white text-lg font-medium shadow-lg py-4"
+                  className="w-full bg-white hover:bg-white/90 text-black text-lg font-medium shadow-lg py-4"
                 >
                   <AppleLogo className="w-5 h-5 mr-2" />
                   Get the App

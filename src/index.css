@@ -34,6 +34,24 @@
     --ring: 240 4.9% 83.9%;
 
     --radius: 1rem;
+    
+    /* Custom scrollytelling colors */
+    --highlight: 120 100% 50%;
+    --highlight-foreground: 0 0% 8%;
+    --inactive: 0 0% 40%;
+    --phone-bg: 0 0% 95%;
+    --phone-border: 0 0% 85%;
+    --message-bg: 120 100% 50%;
+    --message-text: 0 0% 8%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(120 100% 40%) 0%, hsl(120 100% 60%) 100%);
+    --gradient-bg: linear-gradient(180deg, hsl(0 0% 8%) 0%, hsl(0 0% 12%) 100%);
+
+    /* AI Scheduling Colors */
+    --ai-glow: 210 100% 50%;
+    --ai-secondary: 200 100% 60%;
+    --time-accent: 45 100% 60%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -81,6 +99,11 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* AI Scheduling Colors */
+    --ai-glow: 210 100% 50%;
+    --ai-secondary: 200 100% 60%;
+    --time-accent: 45 100% 60%;
   }
 }
 
@@ -127,11 +150,11 @@
   @keyframes pulse-glow {
     0%, 100% {
       opacity: 0.8;
-      box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
     }
     50% {
       opacity: 1;
-      box-shadow: 0 0 30px rgba(96, 165, 250, 0.6);
+      box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
     }
   }
 
@@ -169,7 +192,7 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-rhythm-blue via-purple-400 to-cyan-400 bg-clip-text text-transparent;
   }
 
   .bg-grid {
@@ -308,7 +331,19 @@
   }
   
   .text-gradient-blue {
-    @apply bg-gradient-to-r from-rhythm-blue to-rhythm-soft-lavender bg-clip-text text-transparent;
+    background: linear-gradient(to right, #3b82f6, #E5DEFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #3b82f6; /* Fallback color for browsers that don't support background-clip: text */
+  }
+  
+  /* Ensure gradient text is visible in all browsers */
+  @supports not (background-clip: text) {
+    .text-gradient-blue {
+      color: #3b82f6 !important;
+      background: none !important;
+    }
   }
   
   .text-gradient-coral {
@@ -366,5 +401,44 @@
     .mobile-menu-height {
       height: 100dvh;
     }
+  }
+
+  /* AI Scheduling Animation Classes */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--ai-glow)), hsl(var(--ai-secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card Float Animation */
+  .card-float {
+    animation: float-to-ai 2s ease-in-out forwards;
+  }
+
+  .card-slot {
+    animation: ai-to-slot 2s ease-in-out 2.5s forwards;
+  }
+
+  /* Custom Animations */
+  @keyframes float-to-ai {
+    0% { transform: translateX(0) scale(1); opacity: 1; }
+    50% { transform: translateX(40vw) scale(0.8); opacity: 0.8; }
+    100% { transform: translateX(40vw) scale(0.6); opacity: 0; }
+  }
+
+  @keyframes ai-to-slot {
+    0% { transform: translateX(40vw) scale(0.6); opacity: 0; }
+    50% { transform: translateX(60vw) scale(0.8); opacity: 0.8; }
+    100% { transform: translateX(80vw) scale(1); opacity: 1; }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--ai-glow) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--ai-glow) / 0.6), 0 0 60px hsl(var(--ai-glow) / 0.4); }
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
   }
 }

@@ -1,29 +1,8 @@
-import { motion } from "framer-motion";
-import { Calendar, Brain, Zap } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import { StepCard } from "@/components/ui/step-card";
-
-const steps = [
-  {
-    number: 1,
-    title: "Sync your accounts",
-    description: "Import classes, deadlines, and more from Canvas, Apple Calendar, or Outlook in one click.",
-    icon: <Calendar className="w-8 h-8 text-rhythm-blue" />
-  },
-  {
-    number: 2,
-    title: "Auto-generate your schedule",
-    description: "AI creates a personalized, time-blocked plan to boost your productivity.",
-    icon: <Brain className="w-8 h-8 text-rhythm-blue" />
-  },
-  {
-    number: 3,
-    title: "Adjust with AI",
-    description: "Quickly update your schedule with intelligent suggestions and reminders.",
-    icon: <Zap className="w-8 h-8 text-rhythm-blue" />
-  }
-];
+import TasksCard from "../../TasksCardReact";
+import PulseMessageCard from "./PulseMessageCard";
+import { BrainCircuit } from "lucide-react";
 
 const HowItWorksSection = ({
   id,
@@ -34,47 +13,104 @@ const HowItWorksSection = ({
   className?: string;
   hasGlow?: boolean;
 }) => {
+  // Sample tasks data for the TasksCard
+  const sampleTasks = [
+    {
+      id: '1',
+      title: 'Machine Learning Project Report',
+      status: 'pending' as const,
+      priority: 'high' as const,
+      due_date: '2024-12-24T09:00:00'
+    },
+    {
+      id: '2',
+      title: 'Calculus Problem Set 12',
+      status: 'pending' as const,
+      priority: 'medium' as const,
+      due_date: '2024-12-25T10:00:00'
+    },
+    {
+      id: '3',
+      title: 'Literature Essay Draft',
+      status: 'pending' as const,
+      priority: 'medium' as const,
+      due_date: '2024-12-26T14:00:00'
+    },
+    {
+      id: '4',
+      title: 'Physics Lab Report',
+      status: 'pending' as const,
+      priority: 'low' as const,
+      due_date: '2024-12-27T15:00:00'
+    }
+  ];
+
+  // Dark theme for the TasksCard
+  const darkTheme = {
+    colors: {
+      surface: 'rgba(255, 255, 255, 0.05)',
+      background: 'rgba(0, 0, 0, 0.8)',
+      textPrimary: '#ffffff',
+      textSecondary: '#a0a0a0',
+      primary: '#007AFF',
+      border: 'rgba(255, 255, 255, 0.1)'
+    }
+  };
+
   return (
     <Section className={`relative ${className || ''}`}>
       <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">How it works</h2>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">AI-Powered Scheduling</h2>
           <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-            Get started in minutes and experience the power of AI-driven academic planning.
+            Watch as our AI automatically creates your perfect schedule from Canvas assignments
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <StepCard
-                number={step.number}
-                title={step.title}
-                description={step.description}
-                icon={step.icon}
-              />
-            </motion.div>
-          ))}
+        {/* TasksCard Component */}
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Card - TasksCard */}
+            <div className="glass-card p-8 rounded-2xl shadow-lg relative">
+              {/* Canvas logo and text in top left corner */}
+              <div className="absolute top-6 left-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <img src="/assets/canvas.png" alt="Canvas" className="w-5 h-5" />
+                  <span className="text-white/70 text-sm font-medium">Canvas Integration</span>
+                </div>
+                <div className="text-white text-2xl font-bold">
+                  Auto-sync assignments
+                </div>
+              </div>
+              
+              <div className="pt-16">
+                <TasksCard 
+                  tasks={sampleTasks}
+                  theme={darkTheme}
+                />
+              </div>
+            </div>
+
+            {/* Right Card - PulseMessageCard */}
+            <div className="glass-card p-8 rounded-2xl shadow-lg relative">
+              {/* AI Assistant text in top left corner */}
+              <div className="absolute top-6 left-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <BrainCircuit className="w-5 h-5 text-white" />
+                  <span className="text-white/70 text-sm font-medium">AI Assistant</span>
+                </div>
+                <div className="text-white text-2xl font-bold">
+                  Get daily agendas and reminders
+                </div>
+              </div>
+              
+              <div className="pt-16">
+                <PulseMessageCard />
+              </div>
+            </div>
+          </div>
         </div>
       </Container>
-
-      {hasGlow && (
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-rhythm-blue/10 rounded-full filter blur-3xl"></div>
-      </div>
-      )}
     </Section>
   );
 };

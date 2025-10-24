@@ -3,24 +3,24 @@ import HeroSection from "@/components/HeroSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import IntegrationsSection from "@/components/IntegrationsSection";
 import FeaturesSection from "@/components/FeaturesSection";
-import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import ScrollytellingSection from "@/components/ScrollytellingSection";
 import { CTASection } from "@/components/CTASection";
-import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <div className="">
+    <div className="min-h-screen bg-black text-foreground">
+      <div className="" style={{overflowX: 'hidden', overflowY: 'visible'}}>
         <Navbar />
         <HeroSection />
         <div id="how-it-works"><HowItWorksSection /></div>
         <IntegrationsSection />
+      </div>
+      <ScrollytellingSection />
+      <div className="" style={{overflowX: 'hidden', overflowY: 'visible'}}>
         <div id="features"><FeaturesSection /></div>
         <TestimonialsSection />
-        <div id="pricing"><PricingSection /></div>
-        <FAQSection />
         <CTASection />
         <Footer />
       </div>
